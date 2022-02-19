@@ -62,6 +62,7 @@ signup.post('/', async (ctx) => {
     email: body.email,
     username: body.username,
     password: await encryption.hash(body.password),
+    createdAt: new Date(),
   });
 
   ctx.response.status = 201;

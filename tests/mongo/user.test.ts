@@ -13,6 +13,7 @@ describe('User', async () => {
       username,
       email,
       password,
+      createdAt: new Date(),
     });
 
     const user = await controller.get({ username });
