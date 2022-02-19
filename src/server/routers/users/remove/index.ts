@@ -1,6 +1,5 @@
 import { Controller } from '../../../mongo/index.ts';
 import { oak } from '../../../../deps.ts';
-import * as encryption from '../../../encryption/index.ts';
 import * as middleware from '../../../middleware/index.ts';
 
 export const remove = new oak.Router({ prefix: '/remove' });
