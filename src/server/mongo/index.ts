@@ -4,7 +4,7 @@ import config from '../config.ts';
 import { client } from './client.ts';
 
 export class Controller {
-  private static users = client.database(config.mongo.database).collection<User>('users');
+  private static users = client.database(config.mongo.database).collection<User>(Deno.env.get('COLLECTION') || 'users');
 
   /////// CRUD
   async create(value: UserNoID | UserNoID[]) {
