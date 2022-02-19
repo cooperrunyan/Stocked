@@ -1,4 +1,4 @@
-name: Prettier
+name: Tests
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [main, dev]
 
 jobs:
-  format:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,5 @@ jobs:
         with:
           deno-version: v1.x
 
-      - name: Prettier Action
-        uses: creyD/prettier_action@v4.2
-        with:
-          commit_message: Formatted code with Prettier
-          prettier_options: -write --config ./.prettierrc --ignore-path ./.prettierignore .
+      - name: Run Test
+        run: deno test --no-check -A
