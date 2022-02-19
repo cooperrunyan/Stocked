@@ -3,6 +3,7 @@ import { oak, env } from '../../../../deps.ts';
 import * as middlewares from '../../../middleware/index.ts';
 import * as encryption from '../../../encryption/index.ts';
 import * as validators from '../../../validators/index.ts';
+import { User } from '../../../models/index.ts';
 
 env();
 
@@ -58,12 +59,13 @@ signup.post('/', async (ctx) => {
     return;
   }
 
-  await controller.create({
-    email: body.email,
-    username: body.username,
-    password: await encryption.hash(body.password),
-    createdAt: new Date(),
-  });
+  await controller.create(
+    new User({
+      email: body.email,
+      username: body.username,
+      password: await encryption.hash(body.password),
+    }),
+  );
 
   ctx.response.status = 201;
   ctx.response.body = {
