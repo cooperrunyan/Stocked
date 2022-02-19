@@ -2,3 +2,5 @@ scripts:
   local: deno run --allow-net --allow-env --allow-read --no-check src/server/server.ts
   dev: denon run --allow-net --allow-env --allow-read --no-check src/server/server.ts
   docker: docker-compose up --build
+  prettier: npx prettier --write --config ./.prettierrc --ignore-path ./.prettierignore .
+  test: deno test --no-check -A
