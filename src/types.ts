@@ -4,6 +4,7 @@ export interface UserNoID {
   username: string;
   password: string;
   email: string;
+  createdAt: Date;
 }
 
 export type User = UserNoID & {
