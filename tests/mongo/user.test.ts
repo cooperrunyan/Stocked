@@ -1,5 +1,6 @@
 import { describe, expect, it, run } from '../deps.ts';
 import { Controller } from '../../src/server/mongo/index.ts';
+import { User } from '../../src/server/models/index.ts';
 
 const controller = new Controller();
 
@@ -9,12 +10,13 @@ const password = 'TestPassword1234';
 
 describe('User', async () => {
   it('Should create a user', async () => {
-    await controller.create({
-      username,
-      email,
-      password,
-      createdAt: new Date(),
-    });
+    await controller.create(
+      new User({
+        username,
+        email,
+        password,
+      }),
+    );
 
     const user = await controller.get({ username });
     expect(user).not.toBe(undefined);
