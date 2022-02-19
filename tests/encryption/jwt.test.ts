@@ -1,5 +1,10 @@
 import { describe, expect, it, run } from '../deps.ts';
 import { jwt } from '../../src/server/encryption/index.ts';
+import { env } from '../../src/deps.ts';
+
+env();
+
+console.log(Deno.env.get('SECRET'));
 
 const testUsername = 'TestUser1234';
 

@@ -1,5 +1,10 @@
 import { describe, expect, it, run } from '../deps.ts';
 import { Controller } from '../../src/server/mongo/index.ts';
+import { env } from '../../src/deps.ts';
+
+env();
+
+console.log(Deno.env.get('SECRET'));
 
 const controller = new Controller();
 
