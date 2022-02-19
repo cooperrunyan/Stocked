@@ -1,16 +1,15 @@
 import { describe, expect, it, run } from '../deps.ts';
 import { Controller } from '../../src/server/mongo/index.ts';
-import { env } from '../../src/deps.ts';
-
-env();
-
-console.log(Deno.env.get('SECRET'));
 
 const controller = new Controller();
 
 const username = 'siXO1GqnEkM4ptF_RUHCVNoZkgq_DroyLEHiPEWLCEb-SUK4vJH-ic_hm8fVlGKqeef9TB';
 const email = 'test@cooperrunyan.com';
 const password = 'TestPassword1234';
+
+const TEST_SECRET = 'siXO1GqnEkM4ptF_RUHCVNoZkgq_DroyLEHiPEWLCEb-SUK4vJH-ic_hm8fVlGKqeef9TB';
+
+Deno.env.set('SECRET', TEST_SECRET);
 
 describe('User', async () => {
   it('Should create a user', async () => {

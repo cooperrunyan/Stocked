@@ -1,12 +1,10 @@
 import { describe, expect, it, run } from '../deps.ts';
 import { jwt } from '../../src/server/encryption/index.ts';
-import { env } from '../../src/deps.ts';
-
-env();
-
-console.log(Deno.env.get('SECRET'));
 
 const testUsername = 'TestUser1234';
+
+const TEST_SECRET = 'siXO1GqnEkM4ptF_RUHCVNoZkgq_DroyLEHiPEWLCEb-SUK4vJH-ic_hm8fVlGKqeef9TB';
+Deno.env.set('SECRET', TEST_SECRET);
 
 describe('JWT', async () => {
   it('Should be valid', async () => {
