@@ -19,8 +19,11 @@ jobs:
         with:
           deno-version: v1.x
 
+      - name: Setup Velociraptor
+        uses: jurassiscripts/setup-velociraptor@v2
+
       - name: Run Test
-        run: deno test --no-check -A
+        run: vr test
         env:
           SECRET: TestSecretValue
           DB_USERNAME: testmanager
