@@ -1,17 +1,19 @@
+import { Holdings } from './Holdings.ts';
 import { Bson } from '../../deps.ts';
 
 export class User {
   public username: string;
   public password: string;
   public email: string;
-  public date: Date;
+  public createdAt: Date;
   public _id: Bson.ObjectId;
+  public holdings: Holdings = {};
 
   constructor({ username, password, email }: { username: string; password: string; email: string }) {
     this.username = username;
     this.password = password;
     this.email = email;
-    this.date = new Date();
+    this.createdAt = new Date();
     this._id = new Bson.ObjectId();
   }
 }
