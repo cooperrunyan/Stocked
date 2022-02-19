@@ -21,3 +21,8 @@ jobs:
 
       - name: Run Test
         run: deno test --no-check -A
+        env:
+          SECRET: TestSecretValue
+          DB_USERNAME: testing
+          DB_PASSWORD: P0nCCtVe38IioB8h
+          COLLECTION: Test
