@@ -1,15 +1,16 @@
 import { Bson } from '../../deps.ts';
 import type { User, UserQuery, UserNoID } from '../../types.ts';
-import config from '../config.ts';
+import { mongo } from '../config.ts';
 import { client } from './client.ts';
 
 export class Controller {
-  private static users = client.database(config.mongo.database).collection<User>('users');
+  private static users = client.database(mongo.database).collection<User>('users');
 
-  /////// CRUD
+  /////////////////////////////////////////////////
+  // CRUD
   async create(value: UserNoID | UserNoID[]) {
-    if (Array.isArray(value)) await Controller.users.insertMany(value);
-    else await Controller.users.insertMany([value]);
+    if (Array.isArray(value)) return Controller.users.insertMany(value);
+    return Controller.users.insertMany([value]);
   }
 
   async get(query?: UserQuery) {
@@ -23,10 +24,10 @@ export class Controller {
   }
 
   async remove(query: Partial<User>) {
-    if (Array.isArray(query)) await Controller.users.deleteMany(query);
-    else await Controller.users.deleteMany(query);
+    if (Array.isArray(query)) return Controller.users.deleteMany(query);
+    return Controller.users.deleteMany(query);
   }
-  ///////
+  /////////////////////////////////////////////////
 
   async exists(query: UserQuery): Promise<boolean> {
     return !!(await this.get(query));
