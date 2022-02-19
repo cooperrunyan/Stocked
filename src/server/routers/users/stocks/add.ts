@@ -9,6 +9,24 @@ add.use(middleware.noEmptyBody);
 add.use(middleware.login({ strict: false }));
 add.put('/', async (ctx) => {
   const body = await ctx.request.body().value;
+
+  if (!body.stocks) {
+    ctx.response.status = 406;
+    ctx.response.body = {
+      message: 'No stocks entry was provided',
+    };
+
+    return;
+  }
+
+  if (!Array.isArray(body.stocks)) {
+    ctx.response.status = 406;
+    ctx.response.body = {
+      message: 'The "stocks" property must be an array of objects',
+    };
+    return;
+  }
+
   const controller = new Controller();
   const user = await controller.get(body.email ? { email: body.email } : { username: body.username });
 
@@ -17,20 +35,31 @@ add.put('/', async (ctx) => {
     ctx.response.body = {
       message: 'User not found',
     };
+
     return;
   }
 
-  const volumes = Array.isArray(body.stock.price)
-    ? body.stock.price.map((price: number) => new Volume(price, body.stock.boughtAt || new Date()))
-    : [new Volume(body.stock.price!, body.stock.boughtAt || new Date())];
+  let extVolumes = [];
 
-  if (user.holdings[body.stock.symbol]) user.holdings[body.stock.symbol]?.volumes.push(...volumes);
-  else user.holdings[body.stock.symbol] = new Holding(body.stock.symbol, volumes);
+  for (const stock of body.stocks) {
+    const volumes = stock.volumes.map((volume: { price: number; date?: Date }) => new Volume(volume.price, volume.date ? new Date(volume.date) : new Date()));
+
+    if (user.holdings[stock.symbol]) user.holdings[stock.symbol]?.volumes.push(...volumes);
+    else user.holdings[stock.symbol] = new Holding(stock.symbol, volumes);
+
+    extVolumes.push(
+      ...volumes.map((volume: Volume) => {
+        return { symbol: stock.symbol, ...volume };
+      }),
+    );
+  }
+
   controller.set({ username: user?.username }, { ...user });
 
   ctx.response.status = 201;
   ctx.response.body = {
-    message: `Added volume${Array.isArray(body.stock.price) ? 's' : ''}`,
+    message: 'Added volumes',
+    volumes: extVolumes,
   };
 
   return;
