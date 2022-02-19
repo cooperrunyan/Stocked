@@ -1,13 +1,13 @@
 import { MongoClient, env } from '../../deps.ts';
-import config from '../config.ts';
+import { mongo } from '../config.ts';
 
 env();
 
 export const client = new MongoClient();
 await client.connect({
-  db: config.mongo.database,
-  tls: true,
-  servers: config.mongo.servers.map((host) => {
+  db: mongo.database,
+  tls: mongo.tls,
+  servers: mongo.servers.map((host) => {
     return {
       host,
       port: 27017,
@@ -16,7 +16,7 @@ await client.connect({
   credential: {
     username: Deno.env.get('DB_USERNAME'),
     password: Deno.env.get('DB_PASSWORD'),
-    mechanism: config.mongo.mechanism,
-    db: config.mongo.database,
+    mechanism: mongo.mechanism,
+    db: mongo.database,
   },
 });
