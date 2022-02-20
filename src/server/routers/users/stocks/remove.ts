@@ -3,11 +3,11 @@ import { Controller } from '../../../mongo/index.ts';
 import { oak } from '../../../../deps.ts';
 import * as middleware from '../../../middleware/index.ts';
 
-export const add = new oak.Router({ prefix: '/add' });
+export const remove = new oak.Router({ prefix: '/remove' });
 
-add.use(middleware.noEmptyBody);
-add.use(middleware.login);
-add.put('/', async (ctx) => {
+remove.use(middleware.noEmptyBody);
+remove.use(middleware.login);
+remove.delete('/', async (ctx) => {
   const body = await ctx.request.body().value;
 
   if (!body.stocks) {
@@ -42,23 +42,22 @@ add.put('/', async (ctx) => {
   let extVolumes = [];
 
   for (const stock of body.stocks) {
-    const volumes = stock.volumes.map((volume: { price: number; date?: Date }) => new Volume(volume.price, volume.date ? new Date(volume.date) : new Date()));
-
-    if (user.holdings[stock.symbol]) user.holdings[stock.symbol]?.volumes.push(...volumes);
-    else user.holdings[stock.symbol] = new Holding(stock.symbol, volumes);
-
-    extVolumes.push(
-      ...volumes.map((volume: Volume) => {
-        return { symbol: stock.symbol, ...volume };
-      }),
-    );
+    for (const volume of stock.volumes) {
+      const { id } = volume;
+      for (const volume of user.holdings[stock.symbol].volumes) {
+        if (volume.id === id) {
+          user.holdings[stock.symbol].volumes.splice(user.holdings[stock.symbol].volumes.indexOf(volume));
+          extVolumes.push(volume);
+        }
+      }
+    }
   }
 
   controller.set({ username: user?.username }, { ...user });
 
   ctx.response.status = 201;
   ctx.response.body = {
-    message: 'Added volumes',
+    message: 'Removed volumes',
     volumes: extVolumes,
   };
 

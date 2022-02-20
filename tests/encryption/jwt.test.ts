@@ -9,7 +9,7 @@ describe('JWT', async () => {
   });
 
   it('Should be invalid', async () => {
-    expect((await jwt.validate((await jwt.create(testUsername)).slice(-1) + 'A')).isValid).toBe(false);
+    expect((await jwt.validate((await jwt.create(testUsername)).slice(0, -1) + 'A')).isValid).toBe(false);
   });
 });
 

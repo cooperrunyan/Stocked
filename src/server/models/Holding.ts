@@ -14,7 +14,7 @@ export class Holding {
   }
 
   public remove(index: number | Volume) {
-    if (typeof index === 'number') return this.volumes.slice(index);
-    return this.volumes.slice(this.volumes.indexOf(index));
+    if (typeof index === 'number') return this.volumes.splice(index);
+    return this.volumes.splice(this.volumes.indexOf(index));
   }
 }
