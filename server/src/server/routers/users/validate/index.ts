@@ -13,14 +13,14 @@ validate.get('/', async (ctx) => {
     params[key] = value;
   });
 
-  const { token } = params;
+  const { token, username } = params;
 
   const tkn = token || ((await ctx.cookies.get('jwt')) as string);
 
   // If the token was signed and the user exists in the database
-  let valid =
-    (await jwt.validate(tkn)).isValid &&
-    !!(await controller.get({ username: ((await jwt.validate((await ctx.cookies.get('jwt')) as string)) as any)?.payload?.iss }));
+
+  const payload = (await jwt.validate(tkn)) as any;
+  let valid = (await jwt.validate(tkn)).isValid && !!(await controller.get({ username: username || payload.payload.iss }));
 
   ctx.response.status = 200;
   ctx.response.body = {
