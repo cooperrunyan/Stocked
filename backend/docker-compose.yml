@@ -5,12 +5,12 @@ services:
     build:
       context: ./
       dockerfile: dockerfile
-    image: api:dev
+    image: cooperrunyan/api
     container_name: api
     restart: always
     volumes:
       - ./:/usr/app
     ports:
-      - 3000:3000
+      - 5000:5000
     environment:
-      - PORT=3000
+      - PORT=5000
