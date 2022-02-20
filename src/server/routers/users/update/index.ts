@@ -8,7 +8,7 @@ export const update = new oak.Router({ prefix: '/update' });
 
 const controller = new Controller();
 
-update.use(middleware.login({ strict: true }));
+update.use(middleware.login);
 update.put('/', async (ctx) => {
   const body = await ctx.request.body().value!;
 

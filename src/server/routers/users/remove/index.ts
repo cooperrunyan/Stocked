@@ -6,7 +6,7 @@ export const remove = new oak.Router({ prefix: '/remove' });
 
 const controller = new Controller();
 
-remove.use(middleware.login({ strict: true }));
+remove.use(middleware.login);
 remove.delete('/', async (ctx) => {
   const body = await ctx.request.body().value!;
   const user = await controller.get(body.email ? { email: body.email } : { username: body.username })!;
