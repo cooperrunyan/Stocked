@@ -8,7 +8,7 @@ const controller = new Controller();
 
 remove.use(middleware.login);
 remove.delete('/', async (ctx) => {
-  const body = await ctx.request.body().value!;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
   const user = await controller.get(body.email ? { email: body.email } : { username: body.username })!;
 
   await controller.remove(body.email ? { email: body.email } : { username: body.username });

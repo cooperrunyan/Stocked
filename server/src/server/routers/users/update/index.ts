@@ -10,7 +10,7 @@ const controller = new Controller();
 
 update.use(middleware.login);
 update.put('/', async (ctx) => {
-  const body = await ctx.request.body().value!;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
   if (body.new.email && !validators.email(body.new.email)) {
     ctx.response.status = 406;

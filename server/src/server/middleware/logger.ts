@@ -3,6 +3,7 @@ import { jwt } from '../encryption/index.ts';
 
 export async function logger(ctx: oak.Context, next: () => Promise<unknown>) {
   const startTime = Date.now();
+
   await next();
   console.log(
     `${ctx.request.method} ${ctx.response.status} ${Date.now() - startTime}ms ${

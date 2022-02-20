@@ -12,7 +12,7 @@ const controller = new Controller();
 
 signup.use(middlewares.noEmptyBody);
 signup.post('/', async (ctx) => {
-  const body = await ctx.request.body().value!;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
   if (!body.password || !body.username || !body.email) {
     ctx.response.status = 400;
@@ -66,14 +66,16 @@ signup.post('/', async (ctx) => {
       password: await encryption.hash(body.password),
     }),
   );
+  const token = await encryption.jwt.create(body.username);
+  ctx.cookies.set('jwt', token);
 
   ctx.response.status = 201;
   ctx.response.body = {
     message: 'Account created',
+    token,
     account: {
       email: body.email,
       username: body.username,
     },
   };
-  ctx.cookies.set('jwt', await encryption.jwt.create(body.username));
 });
