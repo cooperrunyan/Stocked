@@ -7,7 +7,7 @@ on:
     branches: [main, dev]
 
 jobs:
-  test:
+  server:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,7 +23,7 @@ jobs:
         uses: jurassiscripts/setup-velociraptor@v2
 
       - name: Run Test
-        run: vr test
+        run: cd ./backend; vr test:server
         env:
           SECRET: TestSecretValue
           DB_USERNAME: testmanager
