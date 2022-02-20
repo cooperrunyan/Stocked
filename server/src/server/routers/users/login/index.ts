@@ -9,7 +9,7 @@ export const login = new oak.Router({ prefix: '/login' });
 const controller = new Controller();
 
 login.post('/', async (ctx) => {
-  const body = await ctx.request.body().value!;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
   if (!body.password || (!body.username && !body.email)) {
     ctx.response.status = 400;
@@ -40,11 +40,14 @@ login.post('/', async (ctx) => {
     return;
   }
 
-  await ctx.cookies.set('jwt', await jwt.create(body.username));
+  const token = await jwt.create(body.username);
+
+  await ctx.cookies.set('jwt', token);
 
   ctx.response.status = 200;
   ctx.response.body = {
     message: 'Login success',
+    token,
     account: {
       email: user.email,
       username: user.username,

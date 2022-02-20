@@ -23,7 +23,7 @@ jobs:
         uses: jurassiscripts/setup-velociraptor@v2
 
       - name: Run Test
-        run: cd ./backend; vr test:server
+        run: cd ./server; vr test:server
         env:
           SECRET: TestSecretValue
           DB_USERNAME: testmanager

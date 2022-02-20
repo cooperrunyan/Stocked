@@ -1,7 +1,7 @@
 FROM denoland/deno:ubuntu
 
-EXPOSE 5000
-WORKDIR /usr/app
+# EXPOSE 5000
+WORKDIR /usr/app/
 
 RUN deno install -qAfn vr --no-check https://deno.land/x/velociraptor@1.4.0/cli.ts
 
@@ -13,4 +13,4 @@ RUN deno cache --unstable --no-check src/server/server.ts
 
 ENTRYPOINT [ "/usr/local/bin/vr" ]
 
-CMD ["local"]
+CMD ["start"]

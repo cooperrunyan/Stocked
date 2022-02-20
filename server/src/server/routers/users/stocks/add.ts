@@ -8,7 +8,7 @@ export const add = new oak.Router({ prefix: '/add' });
 add.use(middleware.noEmptyBody);
 add.use(middleware.login);
 add.put('/', async (ctx) => {
-  const body = await ctx.request.body().value;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
   if (!body.stocks) {
     ctx.response.status = 406;

@@ -5,6 +5,7 @@ import { signup } from './signup/index.ts';
 import { remove } from './remove/index.ts';
 import { update } from './update/index.ts';
 import { stocks } from './stocks/index.ts';
+import { validate } from './validate/index.ts';
 
 export const users = new oak.Router({ prefix: '/users' });
 
@@ -22,3 +23,6 @@ users.use(update.allowedMethods());
 
 users.use(stocks.routes());
 users.use(stocks.allowedMethods());
+
+users.use(validate.routes());
+users.use(validate.allowedMethods());

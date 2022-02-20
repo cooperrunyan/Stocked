@@ -8,7 +8,7 @@ export const remove = new oak.Router({ prefix: '/remove' });
 remove.use(middleware.noEmptyBody);
 remove.use(middleware.login);
 remove.delete('/', async (ctx) => {
-  const body = await ctx.request.body().value;
+  const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
   if (!body.stocks) {
     ctx.response.status = 406;
