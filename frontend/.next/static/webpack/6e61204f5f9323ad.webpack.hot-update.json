@@ -1,1 +1,14 @@
-{"c":["pages/lists","pages/dashboard","pages/settings","pages/login","webpack"],"r":["pages/lists","pages/settings"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Flists&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Flists.tsx!","./pages/lists.tsx","./src/pages/Lists/Lists.tsx","./src/pages/Lists/index.ts","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsettings&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsettings.tsx!","./pages/settings.tsx","./src/pages/Settings/Settings.tsx","./src/pages/Settings/index.ts"]}
+{
+  "c": ["pages/lists", "pages/dashboard", "pages/settings", "pages/login", "webpack"],
+  "r": ["pages/lists", "pages/settings"],
+  "m": [
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Flists&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Flists.tsx!",
+    "./pages/lists.tsx",
+    "./src/pages/Lists/Lists.tsx",
+    "./src/pages/Lists/index.ts",
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsettings&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsettings.tsx!",
+    "./pages/settings.tsx",
+    "./src/pages/Settings/Settings.tsx",
+    "./src/pages/Settings/index.ts"
+  ]
+}

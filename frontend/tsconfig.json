@@ -11,10 +11,7 @@
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "Dom",
-      "ESNext"
-    ],
+    "lib": ["Dom", "ESNext"],
     "incremental": true,
     "importHelpers": true,
     "importsNotUsedAsValues": "preserve",
@@ -40,18 +37,10 @@
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
-    "types": [
-      "next"
-    ],
+    "types": ["next"],
     "useUnknownInCatchVariables": true,
     "target": "es5"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

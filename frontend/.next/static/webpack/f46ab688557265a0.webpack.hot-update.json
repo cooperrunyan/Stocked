@@ -1,1 +1,10 @@
-{"c":["webpack"],"r":["pages/signup"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsignup&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsignup.tsx!","./pages/signup.tsx","./src/pages/Signup/Signup.tsx","./src/pages/Signup/index.ts"]}
+{
+  "c": ["webpack"],
+  "r": ["pages/signup"],
+  "m": [
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsignup&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsignup.tsx!",
+    "./pages/signup.tsx",
+    "./src/pages/Signup/Signup.tsx",
+    "./src/pages/Signup/index.ts"
+  ]
+}

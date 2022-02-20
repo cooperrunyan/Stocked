@@ -1,1 +1,15 @@
-{"c":["pages/lists","pages/dashboard","pages/search","pages/settings","webpack"],"r":["/_error","pages/search","pages/settings"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_error&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fnode_modules%2Fnext%2Fdist%2Fpages%2F_error.js!","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsearch&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsearch.tsx!","./pages/search.tsx","./src/pages/Search/Search.tsx","./src/pages/Search/index.ts","./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsettings&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsettings.tsx!","./pages/settings.tsx","./src/pages/Settings/Settings.tsx","./src/pages/Settings/index.ts"]}
+{
+  "c": ["pages/lists", "pages/dashboard", "pages/search", "pages/settings", "webpack"],
+  "r": ["/_error", "pages/search", "pages/settings"],
+  "m": [
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_error&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fnode_modules%2Fnext%2Fdist%2Fpages%2F_error.js!",
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsearch&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsearch.tsx!",
+    "./pages/search.tsx",
+    "./src/pages/Search/Search.tsx",
+    "./src/pages/Search/index.ts",
+    "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fsettings&absolutePagePath=%2Fhome%2Fcooperrunyan%2FCoding%2FProjects%2FStocked%2Ffrontend%2Fpages%2Fsettings.tsx!",
+    "./pages/settings.tsx",
+    "./src/pages/Settings/Settings.tsx",
+    "./src/pages/Settings/index.ts"
+  ]
+}
