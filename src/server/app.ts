@@ -10,6 +10,7 @@ app.addEventListener('error', (e) => console.error(e.error));
 const api = new oak.Router({ prefix: '/api' });
 
 api.use(middlewares.logger);
+api.use(middlewares.protectServer);
 
 Object.values(routers).forEach((router) => {
   api.use(router.routes());
