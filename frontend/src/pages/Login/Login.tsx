@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
-import { App } from 'src/components';
 import style from 'style/components/Login.module.scss';
 import router from 'next/router';
+import { Container } from 'src/components';
 
 const validators = {
   email(email: string) {
@@ -43,7 +43,9 @@ export function Login() {
 
     if (data.token) {
       document.cookie = 'jwt=' + data.token;
-      router.push('/dashboard');
+      router.push(router.asPath.replace(/login|signup/gi, '').replace('?redirect=', '') || '/dashboard');
+
+      return false;
     }
 
     return true;
@@ -56,7 +58,7 @@ export function Login() {
   }
 
   return (
-    <App login>
+    <Container>
       <div className={style.content}>
         <form
           className={style.form}
@@ -72,6 +74,6 @@ export function Login() {
           </button>
         </form>
       </div>
-    </App>
+    </Container>
   );
 }

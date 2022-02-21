@@ -1,7 +1,7 @@
 @import '../variables.scss';
 
 .nav {
-  background-color: rgba($layer-color, 0.04);
+  background-color: var(--layer4);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,6 +9,7 @@
   padding: 3rem 2rem;
   transition: all 0.2s $tf;
   width: 0;
+  color: var(--layer);
 }
 
 .ul {
@@ -21,7 +22,7 @@
 .li {
   list-style: none;
   width: 100%;
-  color: $layer-color;
+  color: var(--layer);
   border-radius: $border-radius;
 }
 
@@ -41,38 +42,10 @@
   line-height: 1.2;
   letter-spacing: -0.055em;
 
-  transition: all 0.15s $tf;
-
-  &:hover,
-  &:focus-visible {
-    outline: none;
-    background-color: rgba($layer-color, 0.06);
-  }
-
-  &:active {
-    background-color: $layer-color;
-    color: $background-color;
-  }
-
-  &:active ~ .active {
-    background-color: none;
-    color: $layer-color;
-  }
-
   svg {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-}
-
-.active {
-  color: $background-color;
-  background-color: $layer-color;
-
-  &:hover,
-  &:focus-visible {
-    background-color: $layer-color;
   }
 }
 

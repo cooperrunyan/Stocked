@@ -42,8 +42,11 @@ login.post('/', async (ctx) => {
 
   const token = await jwt.create(body.username);
 
-  await ctx.cookies.set('jwt', token);
+  await ctx.cookies.set('jwt', token, {
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 90),
+  });
 
+  ctx.response.headers.set('username', body.username);
   ctx.response.status = 200;
   ctx.response.body = {
     message: 'Login success',
