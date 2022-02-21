@@ -1,0 +1,30 @@
+<svg width="548" height="312" viewBox="0 0 548 312" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_4_2761)">
+    <line x1="0.00159863" y1="248.188" x2="548.002" y2="249.512" stroke="black" stroke-opacity="0.1" stroke-width="1.32367" />
+    <line x1="0.00159863" y1="184.652" x2="548.002" y2="185.976" stroke="black" stroke-opacity="0.1" stroke-width="1.32367" />
+    <line x1="0.00159863" y1="123.763" x2="548.002" y2="125.087" stroke="black" stroke-opacity="0.1" stroke-width="1.32367" />
+    <line x1="0.00159863" y1="61.5507" x2="548.002" y2="62.8744" stroke="black" stroke-opacity="0.1" stroke-width="1.32367" />
+    <line x1="31.1062" y1="311.063" x2="31.1062" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="65.5218" y1="311.063" x2="65.5218" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="99.9373" y1="311.063" x2="99.9373" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="134.353" y1="311.063" x2="134.353" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="168.768" y1="311.063" x2="168.768" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="203.183" y1="311.063" x2="203.183" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="237.599" y1="311.063" x2="237.599" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="272.014" y1="311.063" x2="272.014" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="306.43" y1="311.063" x2="306.43" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="340.845" y1="311.063" x2="340.845" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="375.261" y1="311.063" x2="375.261" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="409.677" y1="311.063" x2="409.677" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="444.092" y1="311.063" x2="444.092" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="478.507" y1="311.063" x2="478.507" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <line x1="512.923" y1="311.063" x2="512.923" y2="-2.89298e-08" stroke="black" stroke-opacity="0.05" stroke-width="1.32367" />
+    <path d="M31.1062 183.99C23.826 174.063 -2.64746 121.116 -2.64746 121.116V317.019H554.618V68.8309C554.618 68.8309 522.188 84.0531 512.923 92.657C503.657 101.261 489.096 149.575 477.845 152.222C466.594 154.87 456.005 131.043 444.092 130.382C432.179 129.72 419.604 140.971 409.676 137.662C399.749 134.353 387.174 115.557 375.923 117.807C364.671 120.057 350.111 157.517 341.507 162.812C332.903 168.106 316.357 176.048 307.092 172.077C297.826 168.106 281.28 134.353 272.014 134.353C262.749 134.353 242.894 171.415 237.599 177.372C232.304 183.328 215.758 217.744 203.183 219.068C190.609 220.391 181.343 195.242 169.43 193.918C157.517 192.594 140.971 203.184 134.353 206.493C127.734 209.802 109.203 227.671 99.9371 228.995C90.6714 230.319 72.8018 221.053 65.5216 217.082C58.2414 213.111 38.3864 193.918 31.1062 183.99Z" fill="#19D179" fill-opacity="0.25" stroke="#15CF76" stroke-width="3.97101" />
+  </g>
+  <rect x="1" y="1" width="546" height="309.063" rx="3" stroke="black" stroke-opacity="0.2" stroke-width="2" />
+  <defs>
+    <clipPath id="clip0_4_2761">
+      <rect width="548" height="311.063" rx="4" fill="white" />
+    </clipPath>
+  </defs>
+</svg>
