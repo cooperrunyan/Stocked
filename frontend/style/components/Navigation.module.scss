@@ -7,9 +7,13 @@
   justify-content: space-between;
   flex-direction: column;
   padding: 3rem 2rem;
-  transition: all 0.2s $tf;
+  transition: all $td $tf;
   width: 0;
   color: var(--layer);
+
+  * {
+    transition: none;
+  }
 }
 
 .ul {
@@ -24,6 +28,7 @@
   width: 100%;
   color: var(--layer);
   border-radius: $border-radius;
+  transition: none;
 }
 
 .link {
@@ -42,10 +47,13 @@
   line-height: 1.2;
   letter-spacing: -0.055em;
 
+  transition: none;
+
   svg {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: none;
   }
 }
 

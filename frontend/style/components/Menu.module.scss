@@ -27,7 +27,9 @@
   align-items: center;
   justify-content: center;
   width: 2.1rem;
-  color: var(--layer);
+  stroke: var(--layer);
+  transition: all $td $tf;
+  stroke-width: 2.45px;
 }
 
 .nameHolder {
