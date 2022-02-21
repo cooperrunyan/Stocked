@@ -1,50 +1,17 @@
-import { HTMLAttributes, useEffect, useState } from 'react';
+import { HTMLAttributes } from 'react';
 import { Link } from '..';
 import style from 'style/components/Navigation.module.scss';
-import { motion, Variant, AnimatePresence } from 'framer-motion';
-
-const defaultOptions = {
-  from: {
-    opacity: 0,
-  },
-  to: {
-    opacity: 1,
-  },
-  time: 0.2,
-};
-
-const animation = {
-  function: 'ease-in-out',
-  socialOutlineDuration: 0.75,
-  globalDelay: 0.1,
-};
+import { motion, AnimatePresence } from 'framer-motion';
 
 import * as icons from './svg';
 
-import { Router, useRouter } from 'next/router';
-import { ColorController } from 'src/config/ColorController';
-import { pallette } from 'src/config';
+import { useRouter } from 'next/router';
 import useTheme from 'src/hooks/useTheme';
-
-type MotionSettings = {
-  ease?: string;
-  delay?: number;
-  finish?: (definition: unknown) => void;
-};
+import { animation } from 'src/config';
 
 export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
-  const [layer, setLayer] = useState<typeof pallette.black | typeof pallette.white>('#000000');
-  const [background, setBackground] = useState<typeof pallette.black | typeof pallette.white>('#ffffff');
-
   const { theme } = useTheme();
-
   const router = useRouter();
-
-  useEffect(() => {
-    const controller = new ColorController();
-    setLayer(controller.layer);
-    setBackground(controller.background);
-  }, []);
 
   return (
     <>
@@ -67,7 +34,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               initial="from"
               exit="from"
               animate="to"
-              transition={transition}>
+              transition={animation}>
               <Link className={style.link} href="/dashboard">
                 Dashboard <icons.Dashboard />
               </Link>
@@ -88,7 +55,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               initial="from"
               exit="from"
               animate="to"
-              transition={transition}>
+              transition={animation}>
               <Link className={style.link} href="/lists">
                 Lists <icons.Lists />
               </Link>
@@ -109,7 +76,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               initial="from"
               exit="from"
               animate="to"
-              transition={transition}>
+              transition={animation}>
               <Link className={style.link} href="/search">
                 Search <icons.Search />
               </Link>
@@ -130,7 +97,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               initial="from"
               exit="from"
               animate="to"
-              transition={transition}>
+              transition={animation}>
               <Link className={style.link} href="/settings">
                 Settings <icons.Settings />
               </Link>
@@ -142,8 +109,3 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
     </>
   );
 }
-
-const transition = {
-  ease: 'easeInOut',
-  duration: 0.2,
-};

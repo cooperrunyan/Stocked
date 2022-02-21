@@ -42,7 +42,7 @@ export default function ({ Component, pageProps, router }: AppProps): JSX.Elemen
       <ThemeProvider theme={themes.light}>
         <AnimatePresence exitBeforeEnter initial>
           <App>
-            <AnimatePresence exitBeforeEnter initial>
+            <AnimatePresence exitBeforeEnter initial={false}>
               <Component {...pageProps} key={router.route} canonical={router.route} />
             </AnimatePresence>
           </App>
