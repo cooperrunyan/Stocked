@@ -32,9 +32,6 @@ export function Menu({
               <label htmlFor="clicker" className={style.label}>
                 <icons.Menu className={style.svg} />
               </label>
-              <Link href="#">
-                <icons.DarkMode className={style.svg} />
-              </Link>
               <Link href="/settings">
                 <icons.Settings className={style.svg} />
               </Link>

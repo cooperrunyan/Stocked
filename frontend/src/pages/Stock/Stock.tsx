@@ -1,5 +1,5 @@
-import { App } from 'src/components';
+import { Container } from 'src/components';
 
 export function Stock() {
-  return <App></App>;
+  return <Container></Container>;
 }
