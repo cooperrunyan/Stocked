@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { HTMLAttributes } from 'react';
 import style from 'style/components/Menu.module.scss';
 
@@ -11,6 +12,8 @@ export function Menu({
 }: HTMLAttributes<HTMLDivElement> & {
   login?: boolean;
 }) {
+  const router = useRouter();
+
   return (
     <div className={style.menu + ' ' + className}>
       <div className={style.login}>
@@ -23,6 +26,11 @@ export function Menu({
               Sign up
             </Link>
           </>
+        )}
+        {!login && (
+          <div onClick={router.back} className={style.back}>
+            <icons.Chevron></icons.Chevron>
+          </div>
         )}
       </div>
       <div className={style.right}>

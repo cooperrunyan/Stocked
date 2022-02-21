@@ -30,6 +30,7 @@
   stroke: var(--layer);
   transition: all $td $tf;
   stroke-width: 2.45px;
+  stroke-linecap: round;
 }
 
 .nameHolder {
@@ -72,4 +73,13 @@
   padding-right: 0;
   padding-left: 2.6rem;
   border-left: 0.2rem solid var(--layer);
+}
+
+.back {
+  stroke: var(--layer);
+  transform: rotate(180deg);
+  cursor: pointer;
+  stroke-width: 2.45px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
