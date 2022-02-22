@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { HTMLAttributes } from 'react';
-import style from 'style/components/Menu.module.scss';
+import style from 'style/src//components/Menu.module.scss';
 
 import { Link } from '..';
 

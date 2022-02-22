@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import style from 'style/components/Login.module.scss';
+import style from 'style/src//components/Login.module.scss';
 import router from 'next/router';
 import { Container } from 'src/components';
 
@@ -43,7 +43,8 @@ export function Signup() {
     const data = await res.json();
 
     if (data.token) {
-      document.cookie = 'jwt=' + data.token;
+      console.log(data);
+      document.cookie = 'jwt=' + data.token + ';path=/';
       router.push(router.asPath.replace(/login|signup/gi, '').replace('?redirect=', '') || '/dashboard');
 
       return '';

@@ -8,19 +8,23 @@ export function Container({ children }: HTMLAttributes<HTMLDivElement>) {
       variants={{
         from: {
           opacity: '0%',
-          transform: 'translateX(4rem)',
+          // transform: 'translateX(4rem)',
         },
         to: {
           opacity: '100%',
-          transform: 'translateX(0rem)',
+          // transform: 'translateX(0rem)',
         },
       }}
       initial="from"
       exit="from"
       animate="to"
+      style={{
+        height: '100%',
+        width: '100%',
+      }}
       transition={{
         ease: 'easeInOut',
-        duration: 0.3,
+        duration: 0.1,
       }}>
       {children}
     </motion.div>

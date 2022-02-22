@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Container, Link } from 'src/components';
 
-import style from 'style/components/Search.module.scss';
+import style from 'style/src//components/Search.module.scss';
 
 interface CardData {
   name: string;

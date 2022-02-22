@@ -1,7 +1,7 @@
 import { Container, Toggle } from 'src/components';
 import router from 'next/router';
 
-import style from 'style/components/Settings.module.scss';
+import style from 'style/src//components/Settings.module.scss';
 import { useEffect, useRef, useState } from 'react';
 
 import useTheme from 'src/hooks/useTheme';
@@ -43,8 +43,8 @@ export function Settings() {
         <button
           className={style.card}
           onClick={(e) => {
-            document.cookie = 'jwt=undefined';
-            router.push('/');
+            document.cookie = 'jwt=;';
+            router.push('/dashboard');
           }}>
           <p className={style.p}>Logout</p>
         </button>
