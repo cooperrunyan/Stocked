@@ -1,0 +1,56 @@
+[
+  {
+    "id": "2342132",
+    "name": "My First List",
+    "holdings": [
+      {
+        "symbol": "V",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      },
+      {
+        "symbol": "CRM",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      },
+      {
+        "symbol": "COST",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      }
+    ]
+  },
+  {
+    "id": "35234532",
+    "name": "My Second List",
+    "holdings": [
+      {
+        "symbol": "CRM",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      },
+      {
+        "symbol": "V",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      },
+      {
+        "symbol": "COST",
+        "buyDate": "new Date()",
+        "currentPrice": 131,
+        "initialPrice": 102,
+        "shares": 14
+      }
+    ]
+  }
+]

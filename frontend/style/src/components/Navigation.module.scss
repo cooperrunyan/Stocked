@@ -1,0 +1,70 @@
+@import '../variables.scss';
+
+.nav {
+  background-color: var(--layer4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 3rem 2rem;
+  transition: all $td $tf;
+  width: 0;
+  color: var(--layer);
+
+  * {
+    transition: none;
+  }
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+}
+
+.li {
+  list-style: none;
+  width: 100%;
+  color: var(--layer);
+  border-radius: $border-radius;
+  transition: none;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem;
+  text-emphasis: none;
+  text-decoration: none;
+  color: inherit;
+  border-radius: $border-radius;
+
+  font-weight: 600;
+  font-size: 1.8rem;
+  line-height: 1.2;
+  letter-spacing: -0.055em;
+
+  transition: none;
+
+  svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none;
+  }
+}
+
+.clicker {
+  display: none;
+}
+
+.clicker:checked ~ .nav {
+  flex: 0 1 0;
+  width: 0;
+  padding-inline: 0;
+  opacity: 0;
+  pointer-events: none;
+}

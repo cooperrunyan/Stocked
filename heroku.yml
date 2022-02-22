@@ -1,5 +1,7 @@
 build:
   docker:
-    api: backend/dockerfile
+    api: server/dockerfile
+    web: frontend/dockerfile
 run:
-  api: cd backend; docker-compose up
+  api: deno run --allow-net --allow-env --allow-read --no-check server/src/server/server.ts
+  web: npm run start

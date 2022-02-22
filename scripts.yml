@@ -1,0 +1,5 @@
+scripts:
+  start: cd ./server; deno run --allow-net --allow-env --allow-read --no-check src/server/server.ts
+  dev: cd ./server; denon run --allow-net --allow-env --allow-read --no-check src/server/server.ts
+  prettier: npx prettier --write --config ./.prettierrc --ignore-path ./.prettierignore .
+  test:server: cd ./server; deno test --no-check -A

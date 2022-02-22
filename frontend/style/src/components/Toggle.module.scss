@@ -1,0 +1,38 @@
+@import '../variables.scss';
+
+.label {
+  width: 6rem;
+  height: 3rem;
+  background: var(--layer12);
+  border-radius: $border-radius;
+  display: block;
+  padding: 0.35rem;
+  position: relative;
+  cursor: pointer;
+  transition: all $td $tf;
+}
+
+.slider {
+  aspect-ratio: 1;
+  height: calc(100% - 0.7rem);
+  background-color: rgba(0, 0, 0, 0.12);
+  border-radius: $border-radius;
+  display: block;
+  position: absolute;
+  top: 0.35rem;
+  left: 0.35rem;
+  transition: all $td $tf;
+}
+
+.check {
+  display: none;
+}
+
+.check:checked ~ .label .slider {
+  left: 100%;
+  transform: translateX(calc(-100% - 0.35rem));
+}
+
+.check:checked ~ .label {
+  background-color: rgba($green, 1);
+}

@@ -28,6 +28,15 @@ module.exports = withPWA({
         destination: '/dashboard',
         permanent: true,
       },
+      {
+        source: '/lists',
+        destination: '/lists/0',
+        permanent: true,
+      },
     ];
+  },
+
+  typescript: {
+    ignoreBuildErrors: true,
   },
 });

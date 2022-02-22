@@ -1,5 +1,6 @@
+import { useRouter } from 'next/router';
 import { HTMLAttributes } from 'react';
-import style from 'style/components/Menu.module.scss';
+import style from 'style/src//components/Menu.module.scss';
 
 import { Link } from '..';
 
@@ -11,6 +12,8 @@ export function Menu({
 }: HTMLAttributes<HTMLDivElement> & {
   login?: boolean;
 }) {
+  const router = useRouter();
+
   return (
     <div className={style.menu + ' ' + className}>
       <div className={style.login}>
@@ -24,6 +27,11 @@ export function Menu({
             </Link>
           </>
         )}
+        {!login && (
+          <div onClick={router.back} className={style.back}>
+            <icons.Chevron></icons.Chevron>
+          </div>
+        )}
       </div>
       <div className={style.right}>
         {!login && (
@@ -32,9 +40,6 @@ export function Menu({
               <label htmlFor="clicker" className={style.label}>
                 <icons.Menu className={style.svg} />
               </label>
-              <Link href="#">
-                <icons.DarkMode className={style.svg} />
-              </Link>
               <Link href="/settings">
                 <icons.Settings className={style.svg} />
               </Link>
