@@ -7,22 +7,26 @@
   padding: 3rem 2rem;
   transition: all 0.2s ease-in-out;
   width: 0;
-  color: var(--layer); }
-  .nav * {
-    transition: none; }
+  color: var(--layer);
+}
+.nav * {
+  transition: none;
+}
 
 .ul {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  width: 100%; }
+  width: 100%;
+}
 
 .li {
   list-style: none;
   width: 100%;
   color: var(--layer);
   border-radius: 0.4rem;
-  transition: none; }
+  transition: none;
+}
 
 .link {
   display: flex;
@@ -38,19 +42,23 @@
   font-size: 1.8rem;
   line-height: 1.2;
   letter-spacing: -0.055em;
-  transition: none; }
-  .link svg {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: none; }
+  transition: none;
+}
+.link svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+}
 
 .clicker {
-  display: none; }
+  display: none;
+}
 
 .clicker:checked ~ .nav {
   flex: 0 1 0;
   width: 0;
   padding-inline: 0;
   opacity: 0;
-  pointer-events: none; }
+  pointer-events: none;
+}

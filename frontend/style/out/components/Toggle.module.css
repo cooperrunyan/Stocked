@@ -7,7 +7,8 @@
   padding: 0.35rem;
   position: relative;
   cursor: pointer;
-  transition: all 0.2s ease-in-out; }
+  transition: all 0.2s ease-in-out;
+}
 
 .slider {
   aspect-ratio: 1;
@@ -18,14 +19,18 @@
   position: absolute;
   top: 0.35rem;
   left: 0.35rem;
-  transition: all 0.2s ease-in-out; }
+  transition: all 0.2s ease-in-out;
+}
 
 .check {
-  display: none; }
+  display: none;
+}
 
 .check:checked ~ .label .slider {
   left: 100%;
-  transform: translateX(calc(-100% - 0.35rem)); }
+  transform: translateX(calc(-100% - 0.35rem));
+}
 
 .check:checked ~ .label {
-  background-color: #19d179; }
+  background-color: #19d179;
+}

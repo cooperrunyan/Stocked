@@ -3,23 +3,28 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  width: 100vw; }
+  width: 100vw;
+}
 
 .menu {
   width: 100%;
   flex: 0 0 11.5rem;
-  background-color: var(--layer8); }
+  background-color: var(--layer8);
+}
 
 .lower {
   flex: 1 1 100%;
-  display: flex; }
+  display: flex;
+}
 
 .contentWindow {
   height: calc(100vh - 11.5rem);
   flex: 1 1 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 4.8rem 2.4rem; }
+  padding: 4.8rem 2.4rem;
+}
 
 .nav {
-  flex: 0 1 50rem; }
+  flex: 0 1 50rem;
+}
