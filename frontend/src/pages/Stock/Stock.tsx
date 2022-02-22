@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Container } from 'src/components';
 
-import style from 'style/components/Stock.module.scss';
+import style from 'style/src//components/Stock.module.scss';
 
 import PlaceHolderSVG from './PlaceHolder.svg';
 

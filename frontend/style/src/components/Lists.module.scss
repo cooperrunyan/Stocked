@@ -1,0 +1,128 @@
+@import '../variables.scss';
+
+.noLists {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 700;
+  letter-spacing: -0.095em;
+  font-size: 2.8rem;
+  flex-direction: column;
+
+  button {
+    border: 0;
+    background-color: var(--layer4);
+    border-radius: $border-radius;
+    padding: 1.2rem 1.6rem;
+    margin-top: 1.2rem;
+
+    font-weight: 600;
+    letter-spacing: -0.095em;
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+}
+
+.lists {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.6rem;
+    list-style: none;
+
+    a {
+      font-weight: 600;
+      font-size: 4.8rem;
+      letter-spacing: -0.095em;
+      color: var(--layer);
+      text-decoration: none;
+      opacity: 0.1;
+    }
+  }
+}
+
+.active {
+  opacity: 1 !important;
+}
+
+.add {
+  color: var(--layer);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+
+.totalSection {
+  padding: 2.6rem;
+  background-color: var(--layer4);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.totaltext {
+  font-weight: 700;
+  font-size: 1.8rem;
+  letter-spacing: -0.095em;
+  color: var(--layer12);
+}
+
+.total {
+  font-weight: 700;
+  font-size: 4.8rem;
+  letter-spacing: -0.095em;
+  color: var(--layer);
+}
+
+.grid {
+  background-color: var(--layer4);
+  border-radius: $border-radius;
+  margin-top: 1.2rem;
+
+  border: 0.1rem solid var(--layer12);
+  overflow-x: scroll;
+
+  ul {
+    display: flex;
+    list-style: none;
+
+    li {
+      padding: 2.6rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.095em;
+
+      border-right: 0.1rem solid var(--layer4);
+
+      flex-shrink: 0;
+
+      color: var(--layer);
+
+      .bold {
+        font-weight: 800;
+        font-size: 3.2rem;
+      }
+
+      .text {
+        margin-left: 0.5ch;
+      }
+    }
+  }
+}
+
+.last {
+  border: 0;
+}

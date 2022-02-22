@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import { Link } from '..';
-import style from 'style/components/Navigation.module.scss';
+import style from 'style/src//components/Navigation.module.scss';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import * as icons from './svg';
@@ -56,7 +56,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               exit="from"
               animate="to"
               transition={animation}>
-              <Link className={style.link} href="/lists">
+              <Link className={style.link} href="/lists/0">
                 Lists <icons.Lists />
               </Link>
             </motion.li>

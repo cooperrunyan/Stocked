@@ -1,7 +1,7 @@
 import { HTMLAttributes, RefObject, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 
-import style from 'style/components/Toggle.module.scss';
+import style from 'style/src//components/Toggle.module.scss';
 import React from 'react';
 
 export const Toggle = React.forwardRef((props: HTMLAttributes<HTMLLabelElement>, ref: React.ForwardedRef<HTMLLabelElement>) => {

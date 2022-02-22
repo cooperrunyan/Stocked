@@ -1,6 +1,9 @@
 import { NextApiRequest } from 'next';
 import { NextResponse } from 'next/server';
 
+import jsonwebtoken from 'jsonwebtoken';
+import { validate } from 'src/hooks/validate';
+
 export default async function handler(req: NextApiRequest, ev: any) {
   let isOnLoginPage = false;
   if (['/favicon.ico', '/manifest.json', '/sw.js'].includes(req.url as string)) return;
@@ -9,13 +12,12 @@ export default async function handler(req: NextApiRequest, ev: any) {
     if (regex.test(req.url as string)) isOnLoginPage = true;
   });
 
-  if (!req.cookies.jwt && !isOnLoginPage) return NextResponse.redirect(`/login?redirect=${req.url?.replace('/', '')}`);
+  if (!req.cookies.jwt && !isOnLoginPage) return NextResponse.redirect(`/login`);
 
-  const response = await fetch(`http://localhost:5000/api/users/validate?token=${req.cookies.jwt}`);
-  const data = await response.json();
+  const [valid, value] = validate(req);
 
-  if (!data.valid && !isOnLoginPage) return NextResponse.redirect(`/login?redirect=${req.url?.replace('/', '')}`);
+  if (!valid && !isOnLoginPage) return NextResponse.redirect(`/login`);
+  if (valid && isOnLoginPage) return NextResponse.redirect('/dashboard');
 
-  if (data.valid && isOnLoginPage) return NextResponse.redirect(req.url?.replace(/login|signup/gi, '').replace('?redirect=', '') || '/dashboard');
   return;
 }

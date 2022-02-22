@@ -3,7 +3,7 @@ import { ReactChild, useEffect, useState } from 'react';
 import { animation } from 'src/config';
 import useTheme from 'src/hooks/useTheme';
 
-import style from 'style/components/App.module.scss';
+import style from 'style/src//components/App.module.scss';
 import { Menu, Navigation } from '..';
 
 export function App({ children }: { children?: ReactChild | ReactChild[] }) {
@@ -56,7 +56,9 @@ export function App({ children }: { children?: ReactChild | ReactChild[] }) {
           <Menu className={style.menu} login={!!login} />
           <div className={style.lower}>
             <Navigation className={style.nav} />
-            <div className={style.content}>{children}</div>
+            <div className={style.contentWindow}>
+              <div className={style.content}>{children}</div>
+            </div>
           </div>
         </div>
       )}

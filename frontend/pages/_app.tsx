@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import { AnimatePresence } from 'framer-motion';
-import '../style/base.scss';
+import '../style/src//base.scss';
 import { App } from 'src/components';
 import { ThemeProvider } from 'src/context/Theme';
 
