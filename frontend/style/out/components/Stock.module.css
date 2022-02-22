@@ -1,27 +1,22 @@
-@import '../variables';
-
 .name {
   font-weight: 700;
   font-size: 3.6rem;
   letter-spacing: -0.095em;
-  color: var(--layer);
-}
+  color: var(--layer); }
 
 .symbol,
 .price {
   font-weight: 700;
   font-size: 7.2rem;
   letter-spacing: -0.095em;
-  color: var(--layer);
-}
+  color: var(--layer); }
 
 .content {
   margin-top: 2.6rem;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  gap: 1.6rem;
-}
+  gap: 1.6rem; }
 
 .info {
   flex: 1 1 40rem;
@@ -30,19 +25,14 @@
   flex-direction: column;
   gap: 1.2rem;
   background-color: var(--layer4);
-  padding: 2.6rem;
-}
+  padding: 2.6rem; }
 
 .infoRow {
   font-weight: 700;
   font-size: 1.8rem;
   line-height: 22px;
-
   letter-spacing: -0.095em;
-
   color: var(--layer);
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
+  justify-content: space-between; }
