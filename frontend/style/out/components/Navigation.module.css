@@ -1,5 +1,3 @@
-@import '../variables';
-
 .nav {
   background-color: var(--layer4);
   display: flex;
@@ -7,29 +5,24 @@
   justify-content: space-between;
   flex-direction: column;
   padding: 3rem 2rem;
-  transition: all $td $tf;
+  transition: all 0.2s ease-in-out;
   width: 0;
-  color: var(--layer);
-
-  * {
-    transition: none;
-  }
-}
+  color: var(--layer); }
+  .nav * {
+    transition: none; }
 
 .ul {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  width: 100%;
-}
+  width: 100%; }
 
 .li {
   list-style: none;
   width: 100%;
   color: var(--layer);
-  border-radius: $border-radius;
-  transition: none;
-}
+  border-radius: 0.4rem;
+  transition: none; }
 
 .link {
   display: flex;
@@ -40,31 +33,24 @@
   text-emphasis: none;
   text-decoration: none;
   color: inherit;
-  border-radius: $border-radius;
-
+  border-radius: 0.4rem;
   font-weight: 600;
   font-size: 1.8rem;
   line-height: 1.2;
   letter-spacing: -0.055em;
-
-  transition: none;
-
-  svg {
+  transition: none; }
+  .link svg {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: none;
-  }
-}
+    transition: none; }
 
 .clicker {
-  display: none;
-}
+  display: none; }
 
 .clicker:checked ~ .nav {
   flex: 0 1 0;
   width: 0;
   padding-inline: 0;
   opacity: 0;
-  pointer-events: none;
-}
+  pointer-events: none; }

@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import { Link } from '..';
-import style from 'style/src//components/Navigation.module.scss';
+import style from 'style/out/components/Navigation.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import * as icons from './svg';
