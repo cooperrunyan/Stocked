@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Container, Link } from 'src/components';
-import style from 'style/src//components/Lists.module.scss';
+import style from 'style/out/components/Lists.module.css';
 
 import Add from './Add.svg';
 

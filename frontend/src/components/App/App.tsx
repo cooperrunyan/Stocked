@@ -3,7 +3,7 @@ import { ReactChild, useEffect, useState } from 'react';
 import { animation } from 'src/config';
 import useTheme from 'src/hooks/useTheme';
 
-import style from 'style/src//components/App.module.scss';
+import style from 'style/out/components/App.module.css';
 import { Menu, Navigation } from '..';
 
 export function App({ children }: { children?: ReactChild | ReactChild[] }) {

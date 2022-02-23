@@ -1,12 +1,9 @@
-@import '../variables';
-
 .searchBar {
   width: 100%;
   background-color: var(--layer4);
   border: none;
   padding: 1.2rem 1.6rem;
   outline: none;
-
   font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: -0.095em;
@@ -17,14 +14,12 @@
   display: flex;
   gap: 1.2rem;
   flex-wrap: wrap;
-
-  & > * {
-    flex: 1 1 80rem;
-  }
-
-  * {
-    text-decoration: none;
-  }
+}
+.content > * {
+  flex: 1 1 80rem;
+}
+.content * {
+  text-decoration: none;
 }
 
 .card {
@@ -48,7 +43,6 @@
   font-weight: 700;
   font-size: 4.8rem;
   letter-spacing: -0.095em;
-
   color: var(--layer);
 }
 

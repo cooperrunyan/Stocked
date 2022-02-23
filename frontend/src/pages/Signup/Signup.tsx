@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import style from 'style/src//components/Login.module.scss';
+import style from 'style/out/components/Login.module.css';
 import router from 'next/router';
 import { Container } from 'src/components';
 

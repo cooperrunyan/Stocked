@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-@import './variables';
-
 :root {
   --layer: #000;
   --layer1: #00000003;
@@ -11,7 +8,6 @@
   --layer12: #0000001f;
   --layer20: #00000033;
   --layer30: #0000004d;
-
   --background: #fff;
 }
 
@@ -26,18 +22,11 @@
 
 body {
   box-sizing: border-box;
-  font-family: $font-family;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   background-color: var(--background);
 }
 
 html {
   font-size: 60%;
 }
-
-// // prettier-ignore
-// * {
-//   transition: color $td ease-in-out,
-//   background $td ease-in-out,
-//   background-color $td ease-in-out,
-//   border $td ease-in-out;
-// }
