@@ -35,7 +35,7 @@ export function Login() {
       delete user.username;
     }
 
-    const res = await fetch('http://localhost:5000/api/users/login', {
+    const res = await fetch('http://localhost:8000/api/users/login', {
       method: 'POST',
       body: JSON.stringify(user),
     });

@@ -10,7 +10,7 @@ services:
     volumes:
       - ./:/usr/app
     ports:
-      - 5000:5000
+      - 8000:8000
     env_file:
       - ./server/.env
   web:

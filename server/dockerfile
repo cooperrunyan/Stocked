@@ -1,6 +1,6 @@
 FROM denoland/deno:ubuntu
 
-# EXPOSE 5000
+# EXPOSE 8000
 WORKDIR /usr/app/
 
 RUN deno install -qAfn vr --no-check https://deno.land/x/velociraptor@1.4.0/cli.ts

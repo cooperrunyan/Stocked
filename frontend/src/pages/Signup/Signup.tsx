@@ -35,7 +35,7 @@ export function Signup() {
 
     if (user.password !== user.confirmPassword) return "Passwords don't match";
 
-    const res = await fetch('http://localhost:5000/api/users/signup', {
+    const res = await fetch('http://localhost:8000/api/users/signup', {
       method: 'POST',
       body: JSON.stringify(user),
     });
