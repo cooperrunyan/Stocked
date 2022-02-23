@@ -1,4 +1,3 @@
-import { Volume, Holding } from '../../../models/index.ts';
 import { Controller } from '../../../mongo/index.ts';
 import { oak } from '../../../../deps.ts';
 import * as middleware from '../../../middleware/index.ts';
@@ -10,20 +9,12 @@ remove.use(middleware.login);
 remove.delete('/', async (ctx) => {
   const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
-  if (!body.stocks) {
+  if (!body.list) {
     ctx.response.status = 406;
     ctx.response.body = {
-      message: 'No stocks entry was provided',
+      message: 'No list was provided',
     };
 
-    return;
-  }
-
-  if (!Array.isArray(body.stocks)) {
-    ctx.response.status = 406;
-    ctx.response.body = {
-      message: 'The "stocks" property must be an array of objects',
-    };
     return;
   }
 
@@ -48,43 +39,17 @@ remove.delete('/', async (ctx) => {
   })();
 
   if (list == null) {
-    ctx.response.status = 400;
-    ctx.response.body = {
-      message: 'That list does not exist',
-    };
-
+    ctx.response.status = 304;
     return;
   }
 
-  if (user.lists[list] == null) {
-    ctx.response.status = 400;
-    ctx.response.body = {
-      message: 'That list does not exist',
-    };
+  user.lists.splice(list, 1);
 
-    return;
-  }
-
-  let extVolumes = [];
-
-  for (const stock of body.stocks) {
-    for (const volume of stock.volumes) {
-      const { id } = volume;
-      for (const volume of user.lists[list].holdings[stock.symbol].volumes) {
-        if (volume.id === id) {
-          user.lists[list].holdings[stock.symbol].volumes.splice(user.lists[list].holdings[stock.symbol].volumes.indexOf(volume));
-          extVolumes.push(volume);
-        }
-      }
-    }
-  }
-
-  controller.set({ username: user?.username }, { ...user });
+  controller.set({ username: user.username }, { ...user });
 
   ctx.response.status = 201;
   ctx.response.body = {
-    message: 'Removed volumes',
-    volumes: extVolumes,
+    message: 'Removed List',
   };
 
   return;
