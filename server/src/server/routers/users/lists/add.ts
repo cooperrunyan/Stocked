@@ -10,29 +10,12 @@ add.use(middleware.login);
 add.put('/', async (ctx) => {
   const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
-  if (body.list == null) {
+  if (!body.list) {
     ctx.response.status = 406;
     ctx.response.body = {
       message: 'No list was provided',
     };
 
-    return;
-  }
-
-  if (!body.stocks) {
-    ctx.response.status = 406;
-    ctx.response.body = {
-      message: 'No stocks entry was provided',
-    };
-
-    return;
-  }
-
-  if (!Array.isArray(body.stocks)) {
-    ctx.response.status = 406;
-    ctx.response.body = {
-      message: 'The "stocks" property must be an array of objects',
-    };
     return;
   }
 
@@ -56,45 +39,36 @@ add.put('/', async (ctx) => {
     }
   })();
 
-  if (list == null) {
+  if (list != null) {
     ctx.response.status = 400;
     ctx.response.body = {
-      message: 'That list does not exist',
+      message: 'That list already exists',
     };
 
     return;
   }
 
-  if (user.lists[list] == null) {
-    ctx.response.status = 400;
-    ctx.response.body = {
-      message: 'That list does not exist',
-    };
+  for (const list of user.lists) {
+    if (list.name === body.list.name) {
+      ctx.response.status = 400;
+      ctx.response.body = {
+        message: 'That list already exists',
+      };
 
-    return;
+      return;
+    }
   }
 
-  let extVolumes = [];
+  user.lists.push({
+    name: body.list.name,
+    holdings: body.list.holdings,
+  });
 
-  for (const stock of body.stocks) {
-    const volumes = stock?.volumes?.map((volume: { price: number; date?: Date }) => new Volume(volume.price, volume.date ? new Date(volume.date) : new Date()));
-
-    if (user.lists[list].holdings[stock.symbol]) user.lists[list].holdings[stock.symbol]?.volumes.push(...volumes);
-    else user.lists[list].holdings[stock.symbol] = new Holding(stock.symbol, volumes);
-
-    extVolumes.push(
-      ...volumes.map((volume: Volume) => {
-        return { symbol: stock.symbol, ...volume };
-      }),
-    );
-  }
-
-  controller.set({ username: user?.username }, { ...user });
+  controller.set({ username: user.username }, { ...user });
 
   ctx.response.status = 201;
   ctx.response.body = {
-    message: 'Added volumes',
-    volumes: extVolumes,
+    message: 'Added List',
   };
 
   return;

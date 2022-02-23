@@ -7,7 +7,10 @@ export class User {
   public email: string;
   public createdAt: Date;
   public _id: Bson.ObjectId;
-  public holdings: Holdings = {};
+  public lists: {
+    name: string;
+    holdings: Holdings;
+  }[] = [];
 
   constructor({ username, password, email }: { username: string; password: string; email: string }) {
     this.username = username;
