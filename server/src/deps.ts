@@ -10,3 +10,4 @@ export const env = () => Object.entries(config()).forEach(([key, value]) => Deno
 export { makeJwt, setExpiration } from 'https://deno.land/x/djwt@v1.7/create.ts';
 export { validateJwt } from 'https://deno.land/x/djwt@v1.7/validate.ts';
 export { parse } from 'https://raw.githubusercontent.com/mayankchoubey/deno-body-parser/main/mod.ts';
+export { default as chalk } from 'https://deno.land/x/chalk_deno@v4.1.1-deno/source/index.js';
