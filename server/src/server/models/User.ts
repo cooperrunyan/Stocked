@@ -1,5 +1,7 @@
+import { Volume } from './Volume.ts';
 import { Holdings } from './Holdings.ts';
 import { Bson } from '../../deps.ts';
+import { Holding } from './Holding.ts';
 
 export class User {
   public username: string;
