@@ -34,14 +34,6 @@ html {
   font-size: 60%;
 }
 
-// // prettier-ignore
-// * {
-//   transition: color $td ease-in-out,
-//   background $td ease-in-out,
-//   background-color $td ease-in-out,
-//   border $td ease-in-out;
-// }
-
 ::-webkit-scrollbar {
   height: 1.2rem;
   width: 1.2rem;
@@ -61,6 +53,6 @@ html {
 }
 
 ::selection {
-  background-color: var(--layer12);
+  background-color: var(--layer4);
   color: var(--layer);
 }

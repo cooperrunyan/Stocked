@@ -2,23 +2,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 3.2rem 4.8rem;
-}
+  padding: 3.2rem 4.8rem; }
 
 .right {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
-}
+  height: 5rem; }
 
 .control {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1.8rem;
-  margin-right: 2.1rem;
-}
+  margin-right: 2.1rem; }
 
 .svg {
   display: flex;
@@ -28,8 +25,7 @@
   stroke: var(--layer);
   transition: all 0.2s ease-in-out;
   stroke-width: 2.45px;
-  stroke-linecap: round;
-}
+  stroke-linecap: round; }
 
 .nameHolder {
   border-left: 0.2rem solid var(--layer);
@@ -37,8 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-left: 2.1rem;
-}
+  padding-left: 2.1rem; }
 
 .name {
   font-style: normal;
@@ -46,13 +41,11 @@
   font-size: 1.8rem;
   line-height: 1.2;
   color: var(--layer);
-  letter-spacing: -0.095em;
-}
+  letter-spacing: -0.055em; }
 
 .label {
   cursor: pointer;
-  user-select: none;
-}
+  user-select: none; }
 
 .login {
   font-weight: 600;
@@ -64,14 +57,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-right: 2.6rem;
-}
+  padding-right: 2.6rem; }
 
 .signup {
   padding-right: 0;
   padding-left: 2.6rem;
-  border-left: 0.2rem solid var(--layer);
-}
+  border-left: 0.2rem solid var(--layer); }
 
 .back {
   stroke: var(--layer);
@@ -79,5 +70,4 @@
   cursor: pointer;
   stroke-width: 2.45px;
   stroke-linecap: round;
-  stroke-linejoin: round;
-}
+  stroke-linejoin: round; }

@@ -19,16 +19,25 @@ interface List {
 
 export function List() {
   const router = useRouter();
-
   const index = +(router.query.id || 0);
-
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  });
 
   const [data, setData] = useState<User['lists'] | null>(null);
   const [alive, kill] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+
+    if (!data) return setTotal(0);
+
+    Object.entries(data[index]?.holdings || {}).forEach(([symbol, holding]) => {
+      holding.volumes.forEach((volume) => {
+        total += volume.initialPrice;
+      });
+    });
+
+    setTotal(total);
+  }, [data]);
 
   useEffect(() => {
     (async () => {
@@ -48,8 +57,7 @@ export function List() {
       if (!alive) return;
       if (res.status !== 200) return setData(null);
 
-      if (!alive) return;
-      setData(data.lists);
+      setData(data.user.lists);
     })();
 
     return () => kill(false);
@@ -79,152 +87,14 @@ export function List() {
           <div className={style.listContent}>
             <div className={style.totalSection}>
               <p className={style.totaltext}>Total Value</p>
-              <p className={style.total}>{formatter.format(6206.4)}</p>
+              <p className={style.total}>{format(total)}</p>
             </div>
           </div>
-          <div className={style.grid}>
-            <ul className={style.row}>
-              <li>
-                <p>
-                  <span className={style.bold}>V</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>14</span> <span className={style.text}>Shares</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(102)}</span> <span className={style.text}>Start</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(131)}</span> <span className={style.text}>Now</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(29)}</span> <span className={style.text}>Profit per share</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1428)}</span> <span className={style.text}>Investment</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(406)}</span> <span className={style.text}>Profit</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1834)}</span> <span className={style.text}>Total</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date())}</span> <span className={style.text}>Bought at</span>
-                </p>
-              </li>
-            </ul>
-            <ul className={style.row}>
-              <li>
-                <p>
-                  <span className={style.bold}>COST</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>14</span> <span className={style.text}>Shares</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(102)}</span> <span className={style.text}>Start</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(131)}</span> <span className={style.text}>Now</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(29)}</span> <span className={style.text}>Profit per share</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1428)}</span> <span className={style.text}>Investment</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(406)}</span> <span className={style.text}>Profit</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1834)}</span> <span className={style.text}>Total</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date())}</span> <span className={style.text}>Bought at</span>
-                </p>
-              </li>
-            </ul>
-            <ul className={style.row}>
-              <li>
-                <p>
-                  <span className={style.bold}>CRM</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>14</span> <span className={style.text}>Shares</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(102)}</span> <span className={style.text}>Start</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(131)}</span> <span className={style.text}>Now</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(29)}</span> <span className={style.text}>Profit per share</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1428)}</span> <span className={style.text}>Investment</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(406)}</span> <span className={style.text}>Profit</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1834)}</span> <span className={style.text}>Total</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date())}</span> <span className={style.text}>Bought at</span>
-                </p>
-              </li>
-            </ul>
-          </div>
+          {Object.entries(data[index].holdings).map(([symbol, holding]) => (
+            <div key={symbol} className={style.grid}>
+              <Row>{holding}</Row>
+            </div>
+          ))}
         </>
       )}
 
@@ -244,76 +114,110 @@ export function List() {
   );
 }
 
-// export async function getStaticProps() {
-//   await new Promise((resolve) => setTimeout(resolve, 25));
+function Row({ children }: { children: User['lists'][number]['holdings'][number] }) {
+  const volumesArr: {
+    id: string;
+    boughtAt: Date;
+    initialPrice: number;
+  }[][] = [];
+  const holding = children;
 
-//   return {
-//     props: { data },
-//     revalidate: 100, // In seconds
-//   };
-// }
+  holding.volumes.forEach((vol) => {
+    const time = new Date(vol.boughtAt).getTime();
 
-// const data = [
-//   {
-//     name: 'My First List',
-//     holdings: [
-//       {
-//         symbol: 'V',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//       {
-//         symbol: 'CRM',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//       {
-//         symbol: 'COST',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//     ],
-//   },
-//   {
-//     name: 'My Second List',
-//     holdings: [
-//       {
-//         symbol: 'CRM',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//       {
-//         symbol: 'V',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//       {
-//         symbol: 'COST',
-//         buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-//         currentPrice: 131,
-//         initialPrice: 102,
-//         shares: 14,
-//       },
-//     ],
-//   },
-// ];
+    let matched = false;
 
-// export async function getStaticPaths() {
-//   // await new Promise((resolve) => setTimeout(resolve, 25));
+    volumesArr.forEach((volume) => {
+      volume.forEach((v) => {
+        const t2 = new Date(v.boughtAt).getTime();
+        if (Math.abs(time - t2) < 1000 * 60 * 60 * 24) {
+          matched = true;
+          volume.push(v);
+        } else matched = false;
+      });
+    });
 
-//   const paths = data.map((list, index) => ({
-//     params: { id: index + '' },
-//   }));
+    if (!matched) volumesArr.push([vol]);
+  });
 
-//   return { paths, fallback: false };
-// }
+  return (
+    <>
+      {volumesArr.map((volumes) => {
+        const investment = (() => {
+          let t = 0;
+          volumes.forEach((volume) => {
+            t += volume.initialPrice;
+          });
+          return t;
+        })();
+
+        const total = (() => {
+          let t = 0;
+          volumes.forEach((volume) => {
+            t += volume.initialPrice + 100;
+          });
+          return t;
+        })();
+
+        return (
+          <ul className={style.row} key={holding.symbol}>
+            <li>
+              <p>
+                <span className={style.bold}>{holding.symbol}</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{volumes.length}</span> <span className={style.text}>Shares</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(volumes[0].initialPrice)}</span> <span className={style.text}>Start</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(volumes[0].initialPrice + 100)}</span> <span className={style.text}>Now</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(volumes[0].initialPrice + 100 - volumes[0].initialPrice)}</span>{' '}
+                <span className={style.text}>Profit per share</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(investment)}</span> <span className={style.text}>Investment</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(total - investment)}</span> <span className={style.text}>Profit</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(total)}</span> <span className={style.text}>Total</span>
+              </p>
+            </li>
+            <li className={style.last}>
+              <p>
+                <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date(volumes[0].boughtAt))}</span>
+                <span className={style.text}>Bought at</span>
+              </p>
+            </li>
+          </ul>
+        );
+      })}
+    </>
+  );
+}
+
+function format(number: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(number);
+}
