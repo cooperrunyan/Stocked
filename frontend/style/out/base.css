@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 :root {
   --layer: #000;
   --layer1: #00000003;
@@ -8,7 +8,8 @@
   --layer12: #0000001f;
   --layer20: #00000033;
   --layer30: #0000004d;
-  --background: #fff; }
+  --background: #fff;
+}
 
 *,
 *::before,
@@ -16,29 +17,37 @@
   padding: 0;
   margin: 0;
   box-sizing: inherit;
-  font-family: inherit; }
+  font-family: inherit;
+}
 
 body {
   box-sizing: border-box;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  background-color: var(--background); }
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: var(--background);
+}
 
 html {
-  font-size: 60%; }
+  font-size: 60%;
+}
 
 ::-webkit-scrollbar {
   height: 1.2rem;
   width: 1.2rem;
-  background-color: rgba(0, 0, 0, 0); }
-  ::-webkit-scrollbar-track {
-    background-color: rgba(0, 0, 0, 0);
-    width: 1.2rem;
-    height: 1.2rem; }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--layer);
-    border-radius: 100vh;
-    border: 0.25rem solid var(--background); }
+  background-color: rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--layer);
+  border-radius: 100vh;
+  border: 0.25rem solid var(--background);
+}
 
 ::selection {
   background-color: var(--layer12);
-  color: var(--layer); }
+  color: var(--layer);
+}
