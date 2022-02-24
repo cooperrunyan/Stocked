@@ -97,3 +97,15 @@
 
 .last {
   border: 0; }
+
+.edit {
+  padding: 1.2rem 1.8rem;
+  background-color: var(--layer);
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.8rem;
+  letter-spacing: -0.095em;
+  color: var(--background);
+  margin-top: 0.6rem; }
