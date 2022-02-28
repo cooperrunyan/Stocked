@@ -1,4 +1,26 @@
 build:
   docker:
-    api: server/dockerfile
-    web: frontend/dockerfile
+    api:
+      build:
+        context: ./server
+        dockerfile: dockerfile
+      image: cooperrunyan/api
+      restart: always
+      volumes:
+        - ./:/usr/app
+      ports:
+        - 8000:8000
+      env_file:
+        - ./server/.env
+    web:
+      build:
+        context: ./frontend
+        dockerfile: dockerfile
+      image: cooperrunyan/web
+      restart: always
+      volumes:
+        - ./:/usr/app
+      ports:
+        - 3000:3000
+      env_file:
+        - ./frontend/.env
