@@ -17,6 +17,10 @@ export class Controller {
     return Controller.users.findOne(this.selector(query));
   }
 
+  async getAll() {
+    return Controller.users.find({}).toArray();
+  }
+
   async set(query: UserQuery, newValue: Partial<User>) {
     return Controller.users.updateOne(this.selector(query), {
       $set: newValue,
