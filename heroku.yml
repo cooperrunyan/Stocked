@@ -2,6 +2,3 @@ build:
   docker:
     api: server/dockerfile
     web: frontend/dockerfile
-run:
-  api: deno run --allow-net --allow-env --allow-read --no-check server/src/server/server.ts
-  web: npm run start
