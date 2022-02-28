@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, ev: any) {
 
   if (!req.cookies.jwt && !isOnLoginPage) return NextResponse.redirect(`/login`);
 
-  const [valid, value] = validate(req);
+  const [valid, value] = await validate(req);
 
   if (!valid && !isOnLoginPage) return NextResponse.redirect(`/login`);
   if (valid && isOnLoginPage) return NextResponse.redirect('/dashboard');

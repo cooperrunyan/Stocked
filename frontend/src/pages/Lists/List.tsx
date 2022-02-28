@@ -6,6 +6,86 @@ import style from 'style/out/components/Lists.module.css';
 
 import Add from './Add.svg';
 
+type StockData = {
+  language: string;
+  region: string;
+  quoteType: string;
+  quoteSourceName: string;
+  triggerable: boolean;
+  customPriceAlertConfidence: string;
+  currency: string;
+  financialCurrency: string;
+  regularMarketOpen: number;
+  averageDailyVolume3Month: number;
+  averageDailyVolume10Day: number;
+  fiftyTwoWeekLowChange: number;
+  fiftyTwoWeekLowChangePercent: number;
+  fiftyTwoWeekRange: string;
+  fiftyTwoWeekHighChange: number;
+  fiftyTwoWeekHighChangePercent: number;
+  fiftyTwoWeekLow: number;
+  fiftyTwoWeekHigh: number;
+  dividendDate: number;
+  earningsTimestamp: number;
+  earningsTimestampStart: number;
+  earningsTimestampEnd: number;
+  trailingAnnualDividendRate: number;
+  trailingPE: number;
+  trailingAnnualDividendYield: number;
+  epsTrailingTwelveMonths: number;
+  epsForward: number;
+  epsCurrentYear: number;
+  priceEpsCurrentYear: number;
+  sharesOutstanding: number;
+  bookValue: number;
+  fiftyDayAverage: number;
+  fiftyDayAverageChange: number;
+  fiftyDayAverageChangePercent: number;
+  twoHundredDayAverage: number;
+  twoHundredDayAverageChange: number;
+  twoHundredDayAverageChangePercent: number;
+  marketCap: number;
+  forwardPE: number;
+  priceToBook: number;
+  sourceInterval: number;
+  exchangeDataDelayedBy: number;
+  pageViewGrowthWeekly: number;
+  exchange: string;
+  shortName: string;
+  longName: string;
+  messageBoardId: string;
+  exchangeTimezoneName: string;
+  exchangeTimezoneShortName: string;
+  gmtOffSetMilliseconds: number;
+  market: string;
+  esgPopulated: boolean;
+  marketState: string;
+  averageAnalystRating: string;
+  tradeable: boolean;
+  firstTradeDateMilliseconds: number;
+  priceHint: number;
+  postMarketChangePercent: number;
+  postMarketTime: number;
+  postMarketPrice: number;
+  postMarketChange: number;
+  regularMarketChange: number;
+  regularMarketChangePercent: number;
+  regularMarketTime: number;
+  regularMarketPrice: number;
+  regularMarketDayHigh: number;
+  regularMarketDayRange: string;
+  regularMarketDayLow: number;
+  regularMarketVolume: number;
+  regularMarketPreviousClose: number;
+  bid: number;
+  ask: number;
+  bidSize: number;
+  askSize: number;
+  fullExchangeName: string;
+  displayName: string;
+  symbol: string;
+};
+
 interface List {
   name: string;
   holdings: {
@@ -17,58 +97,17 @@ interface List {
   }[];
 }
 
-interface StockData {
-  ticker: string;
-  queryCount: number;
-  resultsCount: number;
-  adjusted: boolean;
-  results: [
-    {
-      v: number;
-      vw: number;
-      o: number;
-      c: number;
-      h: number;
-      l: number;
-      t: number;
-      n: number;
-    },
-  ];
-  status: string;
-  request_id: string;
-  count: number;
-}
 export function List() {
   const router = useRouter();
   const index = +(router.query.id || 0);
 
   const [data, setData] = useState<User['lists'] | null>(null);
-  const [alive, kill] = useState(true);
   const [total, setTotal] = useState(0);
 
   const [stocksData, setStocksData] = useState<{ [key: string]: StockData } | null>(null);
 
   useEffect(() => {
-    let total = 0;
-
-    if (!data) return setTotal(0);
-
-    Object.entries(data[index]?.holdings || {}).forEach(([symbol, holding]) => {
-      holding.volumes.forEach((volume) => {
-        total = (() => {
-          let t = 0;
-          if (stocksData) t += (stocksData[symbol]?.results?.at(-1)?.c || 0) - volume.initialPrice;
-          return t;
-        })();
-      });
-    });
-
-    setTotal(total);
-  });
-
-  useEffect(() => {
     (async () => {
-      if (!alive) return;
       const token = /jwt=.+\n/
         .exec((document.cookie + ';').split(';').join('\n'))
         ?.at(0)
@@ -81,48 +120,88 @@ export function List() {
 
       const response = await res.json();
 
-      if (!alive) return;
       if (res.status !== 200) return setData(null);
 
-      const d: { [key: string]: any } = {};
-
       const tempData: User['lists'] = response.user.lists;
+      const symbols = Array.from(new Set(Object.keys(tempData[index].holdings)));
 
-      const symbols = Object.keys(tempData[index].holdings);
-      const promises: Promise<any>[] = [];
+      const requests: string[][] = [[], [], [], [], []];
 
-      const yesterday = new Date();
-
-      yesterday.setDate(yesterday.getDate() - 1);
-
-      symbols.forEach((symbol) => {
-        promises.push(
-          fetch(
-            `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${formatDate(yesterday)}/${formatDate(
-              new Date(),
-            )}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
-          ),
-        );
-      });
-
-      const values = await Promise.all(promises);
-
-      for await (const value of values) {
-        const data: StockData = await value.json();
-
-        d[data.ticker] = data;
+      for (let i = 0; i < symbols.length; i++) {
+        if (i < 10) requests[0].push(symbols[i]);
+        else if (i < 20) requests[1].push(symbols[i]);
+        else if (i < 30) requests[2].push(symbols[i]);
+        else if (i < 40) requests[3].push(symbols[i]);
+        else if (i < 50) requests[4].push(symbols[i]);
       }
 
-      setData(response.user.lists);
-      setStocksData(d);
-    })();
+      const promises: Promise<any>[] = [];
 
-    return () => kill(false);
+      for (const request of requests) {
+        if (!request[0]) break;
+
+        promises.push(fetch(`http://localhost:8000/api/get?stocks=${encodeURIComponent(JSON.stringify(request))}`));
+      }
+
+      await Promise.all(promises);
+      const d = await Promise.all(promises.map(async (promise) => (await promise).json()));
+
+      const stocks: { [key: string]: any } = {};
+
+      d.forEach((da: any) => {
+        Object.entries(da.stocks).forEach(([key, value]) => {
+          stocks[key] = value;
+        });
+      });
+
+      setData(tempData);
+      setStocksData(stocks);
+    })();
   }, []);
+
+  useEffect(() => {
+    let total = 0;
+
+    if (!stocksData || !data) return;
+
+    // console.log({ stocksData, data });
+
+    // Object.entries(stocksData).forEach(([key, value]) => {
+    //   let individual = 0;
+    //   let shares = 0;
+
+    //   for (const [symbol, holding] of Object.entries(data[index].holdings)) {
+    //     if (key === symbol) {
+    //       individual = value.bid;
+    //       shares = holding.volumes.length;
+    //     }
+    //   }
+
+    //   console.log({ individual, shares });
+    //   total += individual * shares;
+    // });
+
+    // setTotal(total);
+    for (const [s, holding] of Object.entries(data[index].holdings)) {
+      let sharePrice = 0;
+      let shares = 0;
+
+      Object.entries(stocksData).forEach(([symbol, stockData]) => {
+        if (s === symbol) {
+          sharePrice = stockData.bid;
+          shares = holding.volumes.length;
+        }
+      });
+
+      total += shares * sharePrice;
+    }
+
+    setTotal(total);
+  });
 
   return (
     <Container>
-      {data && stocksData && (
+      {data && (
         <div className={style.lists}>
           <ul>
             {data.map((list, i) => (
@@ -139,7 +218,7 @@ export function List() {
         </div>
       )}
 
-      {data && stocksData && data[index] && (
+      {data && data[index] && (
         <>
           <div className={style.listContent}>
             <div className={style.totalSection}>
@@ -147,11 +226,13 @@ export function List() {
               <p className={style.total}>{format(total)}</p>
             </div>
           </div>
-          {Object.entries(data[index].holdings).map(([symbol, holding]) => (
-            <div key={symbol} className={style.grid}>
-              <Row stocks={stocksData[symbol]}>{holding}</Row>
-            </div>
-          ))}
+          {Object.entries(data[index].holdings).map(([symbol, holding]) => {
+            return (
+              <div key={symbol} className={style.grid}>
+                <Row stocks={stocksData ? stocksData[symbol] : ({} as any)}>{holding}</Row>
+              </div>
+            );
+          })}
           <button className={style.edit}>Edit list</button>
         </>
       )}
@@ -209,13 +290,7 @@ function Row({ children, stocks }: { children: User['lists'][number]['holdings']
           return t;
         })();
 
-        const total = (() => {
-          let t = 0;
-          volumes.forEach((volume) => {
-            t += (stocks?.results?.at(-1)?.c || 0) - volume.initialPrice;
-          });
-          return t;
-        })();
+        const currentPrice = stocks.bid;
 
         return (
           <ul className={style.row} key={holding.symbol}>
@@ -236,13 +311,12 @@ function Row({ children, stocks }: { children: User['lists'][number]['holdings']
             </li>
             <li>
               <p>
-                <span className={style.bold}>{format(stocks?.results?.at(-1)?.c || 0)}</span> <span className={style.text}>Now</span>
+                <span className={style.bold}>{format(currentPrice)}</span> <span className={style.text}>Now</span>
               </p>
             </li>
             <li>
               <p>
-                <span className={style.bold}>{format((stocks?.results?.at(-1)?.c || 0) - volumes[0].initialPrice)}</span>{' '}
-                <span className={style.text}>Profit per share</span>
+                <span className={style.bold}>{format(currentPrice - volumes[0].initialPrice)}</span> <span className={style.text}>Profit per share</span>
               </p>
             </li>
             <li>
@@ -252,12 +326,12 @@ function Row({ children, stocks }: { children: User['lists'][number]['holdings']
             </li>
             <li>
               <p>
-                <span className={style.bold}>{format(total - investment)}</span> <span className={style.text}>Profit</span>
+                <span className={style.bold}>{format(0 - investment)}</span> <span className={style.text}>Profit</span>
               </p>
             </li>
             <li>
               <p>
-                <span className={style.bold}>{format(total)}</span> <span className={style.text}>Total</span>
+                <span className={style.bold}>{format(investment - volumes.length * currentPrice)}</span> <span className={style.text}>Total</span>
               </p>
             </li>
             <li className={style.last}>
