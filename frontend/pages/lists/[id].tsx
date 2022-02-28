@@ -1,1 +1,1 @@
-export { List as default, getStaticPaths, getStaticProps } from '../../src/pages/Lists';
+export { List as default } from '../../src/pages/Lists';

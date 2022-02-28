@@ -30,3 +30,24 @@ body {
 html {
   font-size: 60%;
 }
+
+::-webkit-scrollbar {
+  height: 1.2rem;
+  width: 1.2rem;
+  background-color: rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+  width: 1.2rem;
+  height: 1.2rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--layer);
+  border-radius: 100vh;
+  border: 0.25rem solid var(--background);
+}
+
+::selection {
+  background-color: var(--layer4);
+  color: var(--layer);
+}

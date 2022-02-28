@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { Container, Link } from 'src/components';
+import { User } from 'src/models';
 import style from 'style/out/components/Lists.module.css';
 
 import Add from './Add.svg';
@@ -15,21 +17,112 @@ interface List {
   }[];
 }
 
-type Lists = List[];
-
-export function List({ data }: { data: Lists }) {
+interface StockData {
+  ticker: string;
+  queryCount: number;
+  resultsCount: number;
+  adjusted: boolean;
+  results: [
+    {
+      v: number;
+      vw: number;
+      o: number;
+      c: number;
+      h: number;
+      l: number;
+      t: number;
+      n: number;
+    },
+  ];
+  status: string;
+  request_id: string;
+  count: number;
+}
+export function List() {
   const router = useRouter();
-
   const index = +(router.query.id || 0);
 
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  const [data, setData] = useState<User['lists'] | null>(null);
+  const [alive, kill] = useState(true);
+  const [total, setTotal] = useState(0);
+
+  const [stocksData, setStocksData] = useState<{ [key: string]: StockData } | null>(null);
+
+  useEffect(() => {
+    let total = 0;
+
+    if (!data) return setTotal(0);
+
+    Object.entries(data[index]?.holdings || {}).forEach(([symbol, holding]) => {
+      holding.volumes.forEach((volume) => {
+        total = (() => {
+          let t = 0;
+          if (stocksData) t += (stocksData[symbol]?.results?.at(-1)?.c || 0) - volume.initialPrice;
+          return t;
+        })();
+      });
+    });
+
+    setTotal(total);
   });
+
+  useEffect(() => {
+    (async () => {
+      if (!alive) return;
+      const token = /jwt=.+\n/
+        .exec((document.cookie + ';').split(';').join('\n'))
+        ?.at(0)
+        ?.replaceAll('jwt=', '')
+        .replace(';', '');
+
+      const res = await fetch(`http://localhost:8000/api/users?token=${token}`, {
+        method: 'GET',
+      });
+
+      const response = await res.json();
+
+      if (!alive) return;
+      if (res.status !== 200) return setData(null);
+
+      const d: { [key: string]: any } = {};
+
+      const tempData: User['lists'] = response.user.lists;
+
+      const symbols = Object.keys(tempData[index].holdings);
+      const promises: Promise<any>[] = [];
+
+      const yesterday = new Date();
+
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      symbols.forEach((symbol) => {
+        promises.push(
+          fetch(
+            `https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${formatDate(yesterday)}/${formatDate(
+              new Date(),
+            )}?adjusted=true&sort=asc&limit=120&apiKey=${process.env.NEXT_PUBLIC_API_KEY}`,
+          ),
+        );
+      });
+
+      const values = await Promise.all(promises);
+
+      for await (const value of values) {
+        const data: StockData = await value.json();
+
+        d[data.ticker] = data;
+      }
+
+      setData(response.user.lists);
+      setStocksData(d);
+    })();
+
+    return () => kill(false);
+  }, []);
 
   return (
     <Container>
-      {data && (
+      {data && stocksData && (
         <div className={style.lists}>
           <ul>
             {data.map((list, i) => (
@@ -46,67 +139,24 @@ export function List({ data }: { data: Lists }) {
         </div>
       )}
 
-      {data[index] && (
+      {data && stocksData && data[index] && (
         <>
           <div className={style.listContent}>
             <div className={style.totalSection}>
               <p className={style.totaltext}>Total Value</p>
-              <p className={style.total}>{formatter.format(6206.4)}</p>
+              <p className={style.total}>{format(total)}</p>
             </div>
           </div>
-          <div className={style.grid}>
-            <ul className={style.row}>
-              <li>
-                <p>
-                  <span className={style.bold}>V</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>14</span> <span className={style.text}>Shares</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(102)}</span> <span className={style.text}>Start</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(131)}</span> <span className={style.text}>Now</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(29)}</span> <span className={style.text}>Profit per share</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1428)}</span> <span className={style.text}>Investment</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(406)}</span> <span className={style.text}>Profit</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{formatter.format(1834)}</span> <span className={style.text}>Total</span>
-                </p>
-              </li>
-              <li>
-                <p>
-                  <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date())}</span> <span className={style.text}>Bought at</span>
-                </p>
-              </li>
-            </ul>
-          </div>
+          {Object.entries(data[index].holdings).map(([symbol, holding]) => (
+            <div key={symbol} className={style.grid}>
+              <Row stocks={stocksData[symbol]}>{holding}</Row>
+            </div>
+          ))}
+          <button className={style.edit}>Edit list</button>
         </>
       )}
 
-      {data && !data[0] && (
+      {data && stocksData && !data[0] && (
         <>
           <div className={style.noLists}>
             <div>
@@ -116,80 +166,127 @@ export function List({ data }: { data: Lists }) {
           </div>
         </>
       )}
+
+      {!data || (!stocksData && <>Loading</>)}
     </Container>
   );
 }
 
-export async function getStaticProps() {
-  await new Promise((resolve) => setTimeout(resolve, 25));
+function Row({ children, stocks }: { children: User['lists'][number]['holdings'][number]; stocks: StockData }) {
+  const volumesArr: {
+    id: string;
+    boughtAt: Date;
+    initialPrice: number;
+  }[][] = [];
+  const holding = children;
 
-  return {
-    props: { data },
-    revalidate: 100, // In seconds
-  };
+  holding.volumes.forEach((vol) => {
+    const time = new Date(vol.boughtAt).getTime();
+
+    let matched = false;
+
+    volumesArr.forEach((volume) => {
+      volume.forEach((v) => {
+        const t2 = new Date(v.boughtAt).getTime();
+        if (Math.abs(time - t2) < 1000 * 60 * 60 * 24) {
+          matched = true;
+          volume.push(v);
+        } else matched = false;
+      });
+    });
+
+    if (!matched) volumesArr.push([vol]);
+  });
+
+  return (
+    <>
+      {volumesArr.map((volumes) => {
+        const investment = (() => {
+          let t = 0;
+          volumes.forEach((volume) => {
+            t += volume.initialPrice;
+          });
+          return t;
+        })();
+
+        const total = (() => {
+          let t = 0;
+          volumes.forEach((volume) => {
+            t += (stocks?.results?.at(-1)?.c || 0) - volume.initialPrice;
+          });
+          return t;
+        })();
+
+        return (
+          <ul className={style.row} key={holding.symbol}>
+            <li>
+              <p>
+                <span className={style.bold}>{holding.symbol}</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{volumes.length}</span> <span className={style.text}>Shares</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(volumes[0].initialPrice)}</span> <span className={style.text}>Start</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(stocks?.results?.at(-1)?.c || 0)}</span> <span className={style.text}>Now</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format((stocks?.results?.at(-1)?.c || 0) - volumes[0].initialPrice)}</span>{' '}
+                <span className={style.text}>Profit per share</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(investment)}</span> <span className={style.text}>Investment</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(total - investment)}</span> <span className={style.text}>Profit</span>
+              </p>
+            </li>
+            <li>
+              <p>
+                <span className={style.bold}>{format(total)}</span> <span className={style.text}>Total</span>
+              </p>
+            </li>
+            <li className={style.last}>
+              <p>
+                <span className={style.bold}>{new Intl.DateTimeFormat('en-US', {}).format(new Date(volumes[0].boughtAt))}</span>
+                <span className={style.text}>Bought at</span>
+              </p>
+            </li>
+          </ul>
+        );
+      })}
+    </>
+  );
 }
 
-const data = [
-  {
-    name: 'My First List',
-    holdings: [
-      {
-        symbol: 'V',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-      {
-        symbol: 'CRM',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-      {
-        symbol: 'COST',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-    ],
-  },
-  {
-    name: 'My Second List',
-    holdings: [
-      {
-        symbol: 'CRM',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-      {
-        symbol: 'V',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-      {
-        symbol: 'COST',
-        buyDate: 'Mon Feb 21 2022 17:10:37 GMT-0700 (Mountain Standard Time)',
-        currentPrice: 131,
-        initialPrice: 102,
-        shares: 14,
-      },
-    ],
-  },
-];
+function format(number: number) {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(number);
+}
 
-export async function getStaticPaths() {
-  // await new Promise((resolve) => setTimeout(resolve, 25));
+function formatDate(d: Date) {
+  var month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
 
-  const paths = data.map((list, index) => ({
-    params: { id: index + '' },
-  }));
+  if (month.length < 2) month = '0' + month;
+  if (day.length < 2) day = '0' + day;
 
-  return { paths, fallback: false };
+  return [year, month, day].join('-');
 }

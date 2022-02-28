@@ -24,6 +24,10 @@
   overflow-x: hidden;
   padding: 4.8rem 2.4rem;
 }
+.contentWindow > * {
+  height: 100%;
+  width: 100%;
+}
 
 .nav {
   flex: 0 1 50rem;

@@ -35,7 +35,7 @@ export function Login() {
       delete user.username;
     }
 
-    const res = await fetch('http://localhost:5000/api/users/login', {
+    const res = await fetch('http://localhost:8000/api/users/login', {
       method: 'POST',
       body: JSON.stringify(user),
     });
@@ -45,7 +45,6 @@ export function Login() {
     if (data.token) {
       console.log(data);
       document.cookie = 'jwt=' + data.token + ';path=/';
-      // router.push(router.asPath.replace(/login|signup/gi, '').replace('?redirect=', '') || '/dashboard');
       router.push('/dashboard');
 
       return false;

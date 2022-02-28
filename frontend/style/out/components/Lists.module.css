@@ -64,6 +64,7 @@
   align-items: flex-start;
   justify-content: center;
   margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .totaltext {
@@ -83,13 +84,14 @@
 .grid {
   background-color: var(--layer4);
   border-radius: 0.4rem;
-  margin-top: 1.2rem;
+  margin-top: 0.6rem;
   border: 0.1rem solid var(--layer12);
-  overflow-x: scroll;
+  width: fit-content;
 }
 .grid ul {
   display: flex;
   list-style: none;
+  flex-wrap: wrap;
 }
 .grid ul li {
   padding: 2.6rem;
@@ -110,4 +112,17 @@
 
 .last {
   border: 0;
+}
+
+.edit {
+  padding: 1.2rem 1.8rem;
+  background-color: var(--layer);
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.8rem;
+  letter-spacing: -0.095em;
+  color: var(--background);
+  margin-top: 0.6rem;
 }
