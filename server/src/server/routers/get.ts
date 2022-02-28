@@ -1,4 +1,5 @@
 import { oak, env } from '../../deps.ts';
+import { Data } from '../../types.ts';
 env();
 
 const requests: {
@@ -10,9 +11,12 @@ setInterval(purge, 1000 * 60 * 5);
 
 const counters = [0, 0, 0];
 
-export const getInfo = new oak.Router({ prefix: '/get' });
-getInfo.get('/', async (ctx) => {
+export const get = new oak.Router({ prefix: '/get' });
+get.get('/', async (ctx) => {
+  let jsonerr = false;
   const symbols: string[] = JSON.parse(ctx.request.url.searchParams.getAll('stocks')[0]);
+
+  if (jsonerr) return;
 
   const returnData: { [key: string]: Data } = {};
 
@@ -38,7 +42,6 @@ getInfo.get('/', async (ctx) => {
   }
 
   const data = await getStocksData(needsToBeFulfilled, getApiKey() || 0);
-  console.log(data);
 
   const requestedData: { [key: string]: Data } = {};
 
@@ -117,83 +120,3 @@ function getApiKey() {
     if (counter < 100) return counters.indexOf(counter);
   }
 }
-
-type Data = {
-  language: string;
-  region: string;
-  quoteType: string;
-  quoteSourceName: string;
-  triggerable: boolean;
-  customPriceAlertConfidence: string;
-  currency: string;
-  financialCurrency: string;
-  regularMarketOpen: number;
-  averageDailyVolume3Month: number;
-  averageDailyVolume10Day: number;
-  fiftyTwoWeekLowChange: number;
-  fiftyTwoWeekLowChangePercent: number;
-  fiftyTwoWeekRange: string;
-  fiftyTwoWeekHighChange: number;
-  fiftyTwoWeekHighChangePercent: number;
-  fiftyTwoWeekLow: number;
-  fiftyTwoWeekHigh: number;
-  dividendDate: number;
-  earningsTimestamp: number;
-  earningsTimestampStart: number;
-  earningsTimestampEnd: number;
-  trailingAnnualDividendRate: number;
-  trailingPE: number;
-  trailingAnnualDividendYield: number;
-  epsTrailingTwelveMonths: number;
-  epsForward: number;
-  epsCurrentYear: number;
-  priceEpsCurrentYear: number;
-  sharesOutstanding: number;
-  bookValue: number;
-  fiftyDayAverage: number;
-  fiftyDayAverageChange: number;
-  fiftyDayAverageChangePercent: number;
-  twoHundredDayAverage: number;
-  twoHundredDayAverageChange: number;
-  twoHundredDayAverageChangePercent: number;
-  marketCap: number;
-  forwardPE: number;
-  priceToBook: number;
-  sourceInterval: number;
-  exchangeDataDelayedBy: number;
-  pageViewGrowthWeekly: number;
-  exchange: string;
-  shortName: string;
-  longName: string;
-  messageBoardId: string;
-  exchangeTimezoneName: string;
-  exchangeTimezoneShortName: string;
-  gmtOffSetMilliseconds: number;
-  market: string;
-  esgPopulated: boolean;
-  marketState: string;
-  averageAnalystRating: string;
-  tradeable: boolean;
-  firstTradeDateMilliseconds: number;
-  priceHint: number;
-  postMarketChangePercent: number;
-  postMarketTime: number;
-  postMarketPrice: number;
-  postMarketChange: number;
-  regularMarketChange: number;
-  regularMarketChangePercent: number;
-  regularMarketTime: number;
-  regularMarketPrice: number;
-  regularMarketDayHigh: number;
-  regularMarketDayRange: string;
-  regularMarketDayLow: number;
-  regularMarketVolume: number;
-  regularMarketPreviousClose: number;
-  bid: number;
-  ask: number;
-  bidSize: number;
-  askSize: number;
-  fullExchangeName: string;
-  displayName: string;
-  symbol: string;
-};
