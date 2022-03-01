@@ -56,7 +56,7 @@ export function Navigation({ className }: HTMLAttributes<HTMLDivElement>) {
               exit="from"
               animate="to"
               transition={animation}>
-              <Link className={style.link} href="/lists/0">
+              <Link className={style.link} href="/lists">
                 Lists <icons.Lists />
               </Link>
             </motion.li>

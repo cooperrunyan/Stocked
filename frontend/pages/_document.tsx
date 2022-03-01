@@ -1,7 +1,5 @@
 import React from 'react';
 import { Html, Head, Main, NextScript } from 'next/document';
-import { DocumentContext } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
 
 export default function Document() {
   return (

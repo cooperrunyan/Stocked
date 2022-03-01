@@ -26,12 +26,7 @@ module.exports = withPWA({
       {
         source: '/',
         destination: '/dashboard',
-        permanent: true,
-      },
-      {
-        source: '/lists',
-        destination: '/lists/0',
-        permanent: true,
+        permanent: false,
       },
     ];
   },

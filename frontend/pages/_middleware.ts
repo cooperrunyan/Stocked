@@ -20,5 +20,3 @@ export default async function handler(req: NextApiRequest, ev: any) {
 
   return;
 }
-
-// export default function Name() {}

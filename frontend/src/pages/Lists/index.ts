@@ -1,1 +1,1 @@
-export { List, getStaticPaths, getStaticProps } from './List';
+export { List } from './List';

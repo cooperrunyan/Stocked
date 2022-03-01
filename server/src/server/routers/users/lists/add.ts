@@ -64,11 +64,14 @@ add.put('/', async (ctx) => {
     holdings: body.list.holdings,
   });
 
+  const index = user.lists.length - 1;
+
   controller.set({ username: user.username }, { ...user });
 
   ctx.response.status = 201;
   ctx.response.body = {
     message: 'Added List',
+    index,
   };
 
   return;
