@@ -18,10 +18,11 @@ export function Header({ children: { user, index, setIndex } }: { children: { us
                 className={i === index ? style.active : ''}
                 onClick={() => {
                   if (setIndex) setIndex(i);
-                  else router.push({
-                    pathname: '/lists',
-                    query: { index: i },
-                  });
+                  else
+                    router.push({
+                      pathname: '/lists',
+                      query: { index: i },
+                    });
                 }}>
                 {list.name}
               </button>

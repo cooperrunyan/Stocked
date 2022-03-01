@@ -3,7 +3,6 @@ import style from 'style/out/components/Lists.module.css';
 import { StockData, User } from 'src/models';
 import { format } from './utils';
 
-
 export function Row({
   children: { symbol, data },
   stocksData,
