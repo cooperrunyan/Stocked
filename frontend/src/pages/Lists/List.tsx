@@ -17,6 +17,11 @@ export function List() {
   const [stockData, setStockData] = useState<{ [key: string]: StockData } | null>(null);
   const [index, indexSetter] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsEdit(false);
+  }, [index]);
 
   function setIndex(index: number) {
     router.push(
@@ -59,7 +64,7 @@ export function List() {
 
   return (
     <Container>
-      {user && stockData && (
+      {user && stockData && !isEdit && (
         <>
           <Header>{{ user, index, setIndex }}</Header>
           <TotalCard>{{ total }}</TotalCard>
@@ -70,7 +75,48 @@ export function List() {
             </div>
           ))}
 
-          <button className={style.edit}>Edit list</button>
+          <button
+            className={style.edit}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsEdit(true);
+            }}>
+            Edit list
+          </button>
+        </>
+      )}
+      {user && stockData && isEdit && (
+        <>
+          <Header>{{ user, index, setIndex }}</Header>
+          <TotalCard>{{ total }}</TotalCard>
+
+          {Object.entries(user.lists[index].holdings).map(([symbol, data]) => (
+            <div className={style.grid} key={symbol}>
+              <Row edit stocksData={stockData}>
+                {{ symbol, data }}
+              </Row>
+            </div>
+          ))}
+
+          <button
+            className={style.edit}
+            onClick={(e) => {
+              e.preventDefault();
+
+              // send api request
+              setIsEdit(false);
+            }}>
+            Confirm
+          </button>
+
+          <button
+            className={style.cancel}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsEdit(false);
+            }}>
+            Cancel
+          </button>
         </>
       )}
     </Container>
