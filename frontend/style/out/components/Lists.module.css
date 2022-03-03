@@ -7,44 +7,50 @@
   font-weight: 700;
   letter-spacing: -0.055em;
   font-size: 2.8rem;
-  flex-direction: column; }
-  .noLists button {
-    border: 0;
-    background-color: var(--layer4);
-    border-radius: 0.4rem;
-    padding: 1.2rem 1.6rem;
-    margin-top: 1.2rem;
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    font-size: 1.6rem;
-    cursor: pointer; }
+  flex-direction: column;
+}
+.noLists button {
+  border: 0;
+  background-color: var(--layer4);
+  border-radius: 0.4rem;
+  padding: 1.2rem 1.6rem;
+  margin-top: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
 
 .lists {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12rem; }
-  .lists ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3.6rem;
-    list-style: none; }
-    .lists ul button {
-      font-weight: 600;
-      font-size: 4.8rem;
-      letter-spacing: -0.055em;
-      color: var(--layer);
-      text-decoration: none;
-      opacity: 0.1;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out; }
+  gap: 12rem;
+}
+.lists ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3.6rem;
+  list-style: none;
+}
+.lists ul button {
+  font-weight: 600;
+  font-size: 4.8rem;
+  letter-spacing: -0.055em;
+  color: var(--layer);
+  text-decoration: none;
+  opacity: 0.1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 
 .active {
-  opacity: 1 !important; }
+  opacity: 1 !important;
+}
 
 .add {
   color: var(--layer);
@@ -55,7 +61,8 @@
   background-color: transparent;
   border: none;
   margin-bottom: 1.6rem;
-  flex: 1 0 40px; }
+  flex: 1 0 40px;
+}
 
 .totalSection {
   padding: 2.6rem;
@@ -66,48 +73,57 @@
   justify-content: center;
   margin-top: 1.2rem;
   margin-bottom: 1.2rem;
-  border-radius: 0.4rem; }
+  border-radius: 0.4rem;
+}
 
 .totaltext {
   font-weight: 700;
   font-size: 1.8rem;
   letter-spacing: -0.055em;
-  color: var(--layer20); }
+  color: var(--layer20);
+}
 
 .total {
   font-weight: 700;
   font-size: 4.8rem;
   letter-spacing: -0.055em;
-  color: var(--layer); }
+  color: var(--layer);
+}
 
 .grid {
   background-color: var(--layer4);
   border-radius: 0.4rem;
   margin-top: 1.2rem;
   border: 0.1rem solid var(--layer12);
-  width: fit-content; }
-  .grid ul {
-    display: flex;
-    list-style: none;
-    flex-wrap: wrap; }
-    .grid ul li {
-      padding: 2.6rem;
-      font-weight: 700;
-      font-size: 1.6rem;
-      letter-spacing: -0.055em;
-      border-right: 0.1rem solid var(--layer4);
-      flex-shrink: 0;
-      color: var(--layer); }
-      .grid ul li .bold {
-        font-weight: 800;
-        font-size: 3.2rem;
-        border: none;
-        outline: none; }
-      .grid ul li .text {
-        margin-left: 0.5ch; }
+  width: fit-content;
+}
+.grid ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.grid ul li {
+  padding: 2.6rem;
+  font-weight: 700;
+  font-size: 1.6rem;
+  letter-spacing: -0.055em;
+  border-right: 0.1rem solid var(--layer4);
+  flex-shrink: 0;
+  color: var(--layer);
+}
+.grid ul li .bold {
+  font-weight: 800;
+  font-size: 3.2rem;
+  border: none;
+  outline: none;
+}
+.grid ul li .text {
+  margin-left: 0.5ch;
+}
 
 .last {
-  border: 0; }
+  border: 0;
+}
 
 .edit {
   padding: 1.2rem 1.8rem;
@@ -120,7 +136,8 @@
   letter-spacing: -0.055em;
   color: var(--background);
   margin-top: 1.2rem;
-  margin-right: 0.6rem; }
+  margin-right: 0.6rem;
+}
 
 .delete {
   padding: 1.2rem 1.8rem;
@@ -133,7 +150,8 @@
   letter-spacing: -0.055em;
   color: var(--background);
   margin-top: 1.2rem;
-  margin-right: 0.6rem; }
+  margin-right: 0.6rem;
+}
 
 .card {
   background-color: var(--layer4);
@@ -148,7 +166,8 @@
   outline: none;
   display: block;
   width: 100%;
-  margin-top: 1.2rem; }
+  margin-top: 1.2rem;
+}
 
 .cancel {
   padding: 1.2rem 1.8rem;
@@ -161,12 +180,15 @@
   letter-spacing: -0.055em;
   color: var(--layer);
   margin-top: 1.2rem;
-  margin-right: 0.6rem; }
+  margin-right: 0.6rem;
+}
 
 .listContainer {
   flex: 1 1 100%;
-  overflow-x: scroll; }
-  .listContainer > * {
-    width: max-content;
-    padding-bottom: 1.2rem;
-    padding-right: 12rem; }
+  overflow-x: scroll;
+}
+.listContainer > * {
+  width: max-content;
+  padding-bottom: 1.2rem;
+  padding-right: 12rem;
+}
