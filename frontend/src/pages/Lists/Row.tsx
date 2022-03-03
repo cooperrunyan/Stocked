@@ -17,7 +17,14 @@ export function Row({
   return (
     <div>
       <ul className={style.row} key={symbol}>
-        <RowItem edit={!!edit}>{{ bold: symbol, small: '' }}</RowItem>
+        <RowItem>{{ bold: symbol, small: '' }}</RowItem>
+        {!!edit && (
+          <li className={style.delete}>
+            <button id="delete" onClick={() => {}}>
+              Del
+            </button>
+          </li>
+        )}
         <RowItem edit={!!edit}>{{ bold: data.volumes.length, small: 'Shares' }}</RowItem>
         <RowItem edit={!!edit}>{{ bold: format(data.volumes[0].initialPrice), small: 'Start' }}</RowItem>
         <RowItem>{{ bold: format(value), small: 'Now' }}</RowItem>
@@ -30,7 +37,6 @@ export function Row({
           }}
         </RowItem>
         <RowItem>{{ bold: format(value * data.volumes.length), small: 'Total' }}</RowItem>
-        <RowItem edit={!!edit}>{{ bold: new Intl.DateTimeFormat('en-US', {}).format(new Date(data.volumes[0].boughtAt)), small: 'Bought At' }}</RowItem>
       </ul>
     </div>
   );

@@ -110,6 +110,38 @@ export function List() {
           </button>
 
           <button
+            className={style.delete}
+            onClick={async (e) => {
+              e.preventDefault();
+
+              const token = /jwt=.+\n/
+                .exec((document.cookie + ';').split(';').join('\n'))
+                ?.at(0)
+                ?.replaceAll('jwt=', '')
+                .replace(';', '');
+
+              const res = await fetch('http://localhost:8000/api/users/lists/remove', {
+                method: 'DELETE',
+                body: JSON.stringify({
+                  username: user.username,
+                  list: index,
+                  token,
+                }),
+              });
+
+              const data = await res.json();
+
+              if (data.message === 'Removed List') {
+                setIsEdit(false);
+                setIndex(Math.abs(index - 1));
+              } else {
+                alert('Error:  ' + data.message);
+              }
+            }}>
+            Delete
+          </button>
+
+          <button
             className={style.cancel}
             onClick={(e) => {
               e.preventDefault();

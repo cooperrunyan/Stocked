@@ -9,7 +9,7 @@ remove.use(middleware.login);
 remove.delete('/', async (ctx) => {
   const body = typeof (await ctx.request.body().value) === 'string' ? JSON.parse(await ctx.request.body().value) : await ctx.request.body().value;
 
-  if (!body.list) {
+  if (body.list == null) {
     ctx.response.status = 406;
     ctx.response.body = {
       message: 'No list was provided',

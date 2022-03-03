@@ -157,6 +157,23 @@
   margin-right: 0.6rem;
 }
 
+.delete {
+  padding: 1.2rem 1.8rem;
+  background-color: $red;
+  border-radius: $border-radius;
+  border: none;
+  cursor: pointer;
+
+  font-weight: bold;
+  font-size: 1.8rem;
+
+  letter-spacing: -0.055em;
+  color: var(--background);
+
+  margin-top: 1.2rem;
+  margin-right: 0.6rem;
+}
+
 .card {
   background-color: var(--layer4);
   padding: 4rem 2.6rem;
